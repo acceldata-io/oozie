@@ -18,7 +18,7 @@
 
 package org.apache.oozie.action.hadoop;
 
-import org.jdom.Element;
+import org.jdom2.Element;
 
 public class Spark3ActionExecutor extends SparkActionExecutor {
 
