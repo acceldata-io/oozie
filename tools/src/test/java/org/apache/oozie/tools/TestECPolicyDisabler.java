@@ -30,6 +30,7 @@ import static org.mockito.Mockito.when;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.hdfs.DistributedFileSystem;
+import org.apache.hadoop.hdfs.protocol.ErasureCodingPolicy;
 import org.apache.hadoop.hdfs.protocol.SystemErasureCodingPolicies;
 import org.apache.hadoop.hdfs.protocol.SystemErasureCodingPolicies.ReplicationPolicy;
 import org.apache.hadoop.ipc.RemoteException;
@@ -47,7 +48,7 @@ import org.mockito.Mockito;
 public class TestECPolicyDisabler  {
 
     static abstract class MockDistributedFileSystem extends DistributedFileSystem {
-        public abstract SystemErasureCodingPolicies.ReplicationPolicy getErasureCodingPolicy(Path path);
+        public abstract ErasureCodingPolicy getErasureCodingPolicy(Path path);
         public abstract void setErasureCodingPolicy(Path path, String policy);
     }
 
@@ -111,7 +112,7 @@ public class TestECPolicyDisabler  {
         MockDistributedFileSystem fs = mock(MockDistributedFileSystem.class);
         when(fs.getErasureCodingPolicy(any())).thenReturn(ReplicationPolicy.OTHER);
 
-        ReplicationPolicy mockPolicy = mock(ReplicationPolicy.class);
+        ErasureCodingPolicy mockPolicy = mock(ErasureCodingPolicy.class);
         SystemErasureCodingPolicies.setSystemPolicy(mockPolicy);
         when(mockPolicy.getName()).thenThrow(createNoSuchMethodException());
         ECPolicyDisabler.Result result = ECPolicyDisabler.check(fs, null);

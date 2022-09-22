@@ -18,32 +18,34 @@
 
 package org.apache.hadoop.hdfs.protocol;
 
+import org.apache.hadoop.io.erasurecode.ErasureCodeConstants;
 
 /**
  * Mock class for testing, called from ECPolicyDisabler with reflection.
  *
  */
 public class SystemErasureCodingPolicies {
-    private static ReplicationPolicy systemPolicy = ReplicationPolicy.DEFAULT;
+    private static ErasureCodingPolicy systemPolicy = ReplicationPolicy.DEFAULT;
 
     public static class ReplicationPolicy {
-        public final static ReplicationPolicy DEFAULT = new ReplicationPolicy("DEFAULT");
-        public final static ReplicationPolicy OTHER = new ReplicationPolicy("OTHER");
-        private String name;
-        public ReplicationPolicy(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return name;
-        }
+      private static final int DEFAULT_CELLSIZE = 1024 * 1024;
+      public static final ErasureCodingPolicy DEFAULT =
+          new ErasureCodingPolicy("default",
+              ErasureCodeConstants.REPLICATION_1_2_SCHEMA,
+              DEFAULT_CELLSIZE,
+              ErasureCodeConstants.REPLICATION_POLICY_ID);
+      public static final ErasureCodingPolicy OTHER =
+          new ErasureCodingPolicy("other",
+              ErasureCodeConstants.REPLICATION_1_2_SCHEMA,
+              DEFAULT_CELLSIZE,
+              ErasureCodeConstants.REPLICATION_POLICY_ID);
     }
 
-    public static ReplicationPolicy getReplicationPolicy() {
+    public static ErasureCodingPolicy getReplicationPolicy() {
         return systemPolicy;
     }
 
-    public static void setSystemPolicy(ReplicationPolicy systemPolicy) {
+    public static void setSystemPolicy(ErasureCodingPolicy systemPolicy) {
         SystemErasureCodingPolicies.systemPolicy = systemPolicy;
     }
 }
