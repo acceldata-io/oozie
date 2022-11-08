@@ -60,6 +60,9 @@ done
 for i in "${BASEDIR}/libext/"*.jar; do
   OOZIECPPATH="${OOZIECPPATH}:$i"
 done
+for i in "${BASEDIR}/embedded-oozie-server/webapp/WEB-INF/lib/"*.jar; do
+  OOZIECPPATH="${OOZIECPPATH}:$i"
+done
 
 
 if test -z ${JAVA_HOME}

@@ -140,7 +140,7 @@ do
     fi
 
     OOZIECPPATH=""
-    OOZIECPPATH=${BASEDIR}/lib/'*':${BASEDIR}/libtools/'*':${BASEDIR}/libext/'*'
+    OOZIECPPATH=${BASEDIR}/lib/'*':${BASEDIR}/libtools/'*':${BASEDIR}/libext/'*':${JETTY_LIB_DIR}/'*'
 
     if test -z ${JAVA_HOME}; then
       JAVA_BIN=java
