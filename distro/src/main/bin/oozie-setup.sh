@@ -137,10 +137,12 @@ do
     if [ ! -d "${BASEDIR}/lib" ]; then
       mkdir ${BASEDIR}/lib
       cp ${JETTY_LIB_DIR}/*  ${BASEDIR}/lib
+    else
+      cp -f ${JETTY_LIB_DIR}/*  ${BASEDIR}/lib
     fi
 
     OOZIECPPATH=""
-    OOZIECPPATH=${BASEDIR}/lib/'*':${BASEDIR}/libtools/'*':${BASEDIR}/libext/'*':${JETTY_LIB_DIR}/'*'
+    OOZIECPPATH=${BASEDIR}/lib/'*':${BASEDIR}/libtools/'*':${BASEDIR}/libext/'*'
 
     if test -z ${JAVA_HOME}; then
       JAVA_BIN=java
