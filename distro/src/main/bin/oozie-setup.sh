@@ -227,7 +227,8 @@ prepare_jetty() {
   elif [ "${addExtjs}" = "true" -a -e ${JETTY_WEBAPP_DIR}/ext-2.2 ]; then
      # TODO
     echo "${JETTY_WEBAPP_DIR}/ext-2.2 already exists"
-    cleanup_and_exit
+    unzip -o ${extjsHome} -d ${JETTY_WEBAPP_DIR}
+    # cleanup_and_exit
   fi
 
   if [ "${addJars}" = "true" ]; then
@@ -238,7 +239,8 @@ prepare_jetty() {
       if [ ! $found = 0 ]; then
         echo
         echo "${JETTY_LIB_DIR} already contains JAR ${jarPath}"
-        cleanup_and_exit
+        cp -f ${jarPath} ${JETTY_LIB_DIR}
+        # cleanup_and_exit
       fi
       cp ${jarPath} ${JETTY_LIB_DIR}
       checkExec "copying jar ${jarPath} to '${JETTY_LIB_DIR}'"
