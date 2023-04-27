@@ -48,6 +48,8 @@ if [ ! -d "${BASEDIR}/lib" ]; then
   mv ${BASEDIR}/lib/WEB-INF/lib/*.jar ${BASEDIR}/lib/
   rmdir ${BASEDIR}/lib/WEB-INF/lib
   rmdir ${BASEDIR}/lib/WEB-INF
+else
+  cp -f ${BASEDIR}/embedded-oozie-server/webapp/WEB-INF/lib/*.jar ${BASEDIR}/lib
 fi
 
 OOZIECPPATH=""
