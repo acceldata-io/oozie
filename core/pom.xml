@@ -158,7 +158,6 @@
             <groupId>org.apache.hive</groupId>
             <artifactId>hive-exec</artifactId>
             <scope>compile</scope>
-            <classifier>${hive.classifier}</classifier>
             <exclusions>
                 <exclusion>
                     <groupId>org.pentaho</groupId>
