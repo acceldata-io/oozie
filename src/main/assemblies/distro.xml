@@ -109,12 +109,6 @@
             <source>${basedir}/../core/target/oozie-core-${project.version}.jar</source>
             <outputDirectory>/oozie-core</outputDirectory>
         </file>
-        <!-- Oozie core test jar -->
-        <file>
-            <source>${basedir}/../core/target/oozie-core-${project.version}-tests.jar</source>
-            <outputDirectory>/oozie-core</outputDirectory>
-        </file>
-        <!-- Oozie Documentation -->
         <file>
             <source>${basedir}/../docs/target/oozie-docs-${project.version}-docs.zip</source>
             <outputDirectory>/</outputDirectory>
