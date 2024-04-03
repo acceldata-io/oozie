@@ -36,12 +36,13 @@
         <dependency>
             <groupId>org.apache.oozie</groupId>
             <artifactId>oozie-core</artifactId>
+            <version>${open.oozie.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.oozie</groupId>
             <artifactId>oozie-core</artifactId>
-            <version>${project.version}</version>
+            <version>${open.oozie.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>

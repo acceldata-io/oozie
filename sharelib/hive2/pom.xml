@@ -222,6 +222,7 @@ e
         <dependency>
             <groupId>org.apache.oozie</groupId>
             <artifactId>oozie-core</artifactId>
+  	    <version>${open.oozie.version}</version>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
