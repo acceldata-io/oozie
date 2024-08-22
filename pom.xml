@@ -196,9 +196,9 @@
         </repository>
 
     <repository>
-            <id>acceldata repo</id>
-            <name>acceldata repo</name>
-            <url>https://repo1.acceldata.dev/repository/odp-central/</url>
+            <id>acceldata snap repo</id>
+            <name>acceldata snap repo</name>
+            <url>https://repo1.acceldata.dev/repository/odp-snapshot/</url>
             <releases>
         <enabled>true</enabled>
       </releases>
