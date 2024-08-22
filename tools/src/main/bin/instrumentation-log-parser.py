@@ -48,15 +48,15 @@ def main(argv):
         usage()
         sys.exit(1)
 
-    print 'Input file is: ', inputfile
-    print 'Output file is: ', outputfile
-    print 'Paremeters are: ', parameters
+    print('Input file is: ', inputfile)
+    print('Output file is: ', outputfile)
+    print('Paremeters are: ', parameters)
 
     parse_instrumentation_log(inputfile, outputfile, parameters)
 
 
 def usage():
-    print 'USAGE: python instrumentation-log-parser.py -i <inputfile> -o <outputfile> -p <path/to/json/value1,path/to/json/value2>'
+    print('USAGE: python instrumentation-log-parser.py -i <inputfile> -o <outputfile> -p <path/to/json/value1,path/to/json/value2>')
 
 
 def info(message):
@@ -76,7 +76,7 @@ def warn(message):
 
 
 def log(level, message):
-    print '[%s] [%s] %s' % (datetime.now(), level, message)
+    print('[%s] [%s] %s' % (datetime.now(), level, message))
 
 
 def parse_instrumentation_log(inputfile, outputfile, parameters):
