@@ -160,8 +160,18 @@
         <module>distro</module>
         <module>zookeeper-security-tests</module>
     </modules>
-
     <repositories>
+    <repository>
+            <id>acceldata repo</id>
+            <name>acceldata repo</name>
+            <url>https://repo1.acceldata.dev/repository/odp-central/</url>
+            <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
         <repository>
             <id>central</id>
             <url>https://repo1.maven.org/maven2</url>
@@ -186,9 +196,9 @@
         </repository>
 
     <repository>
-            <id>acceldata repo</id>
-            <name>acceldata repo</name>
-            <url>https://repo1.acceldata.dev/repository/odp-central/</url>
+            <id>acceldata snap repo</id>
+            <name>acceldata snap repo</name>
+            <url>https://repo1.acceldata.dev/repository/odp-snapshot/</url>
             <releases>
         <enabled>true</enabled>
       </releases>
@@ -976,6 +986,12 @@
                 <groupId>org.apache.hadoop</groupId>
                 <artifactId>hadoop-common</artifactId>
                 <version>${hadoop.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
