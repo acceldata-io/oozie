@@ -131,6 +131,7 @@
          <curator.version>2.5.0</curator.version>
          <jackson.version>2.6.5</jackson.version>
          <log4j.version>1.2.17</log4j.version>
+         <reload4j.version>1.2.25</reload4j.version>
          <activemq.version>5.15.9</activemq.version>
          <commons.lang3.version>3.3.2</commons.lang3.version>
          <httpcore.version>4.3.3</httpcore.version>
@@ -159,8 +160,18 @@
         <module>distro</module>
         <module>zookeeper-security-tests</module>
     </modules>
-
     <repositories>
+    <repository>
+            <id>acceldata repo</id>
+            <name>acceldata repo</name>
+            <url>https://repo1.acceldata.dev/repository/odp-central/</url>
+            <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
         <repository>
             <id>central</id>
             <url>https://repo1.maven.org/maven2</url>
@@ -185,9 +196,9 @@
         </repository>
 
     <repository>
-            <id>acceldata repo</id>
-            <name>acceldata repo</name>
-            <url>https://repo1.acceldata.dev/repository/odp-central/</url>
+            <id>acceldata snap repo</id>
+            <name>acceldata snap repo</name>
+            <url>https://repo1.acceldata.dev/repository/odp-snapshot/</url>
             <releases>
         <enabled>true</enabled>
       </releases>
@@ -297,12 +308,22 @@
                         <groupId>org.apache.logging.log4j</groupId>
                         <artifactId>log4j-slf4j-impl</artifactId>
                     </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
                 </exclusions>
             </dependency>
             <dependency>
                  <groupId>org.apache.oozie</groupId>
                 <artifactId>oozie-sharelib-hive2</artifactId>
                 <version>${project.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.apache.oozie</groupId>
@@ -313,6 +334,12 @@
                 <groupId>org.apache.oozie</groupId>
                 <artifactId>oozie-sharelib-git</artifactId>
                 <version>${project.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.apache.oozie</groupId>
@@ -330,6 +357,12 @@
                 <groupId>org.apache.oozie</groupId>
                 <artifactId>oozie-fluent-job-api</artifactId>
                 <version>${project.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.apache.oozie</groupId>
@@ -422,6 +455,12 @@
                 <groupId>org.apache.hadoop</groupId>
                 <artifactId>hadoop-client</artifactId>
                 <version>${hadoop.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
@@ -435,6 +474,12 @@
                 <artifactId>hadoop-minicluster</artifactId>
                 <version>${hadoop.version}</version>
                 <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
@@ -557,6 +602,10 @@
                         <artifactId>hadoop-core</artifactId>
                         <groupId>org.apache.hadoop</groupId>
                     </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
                 </exclusions>
             </dependency>
 
@@ -609,6 +658,10 @@
                     <exclusion>
                         <groupId>org.apache.logging.log4j</groupId>
                         <artifactId>log4j-slf4j-impl</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
@@ -929,6 +982,12 @@
                 <groupId>org.apache.hadoop</groupId>
                 <artifactId>hadoop-common</artifactId>
                 <version>${hadoop.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
@@ -1340,13 +1399,17 @@
                         <groupId>javax.servlet</groupId>
                         <artifactId>servlet-api</artifactId>
                     </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
                 </exclusions>
             </dependency>
 
             <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>${log4j.version}</version>
+                <groupId>ch.qos.reload4j</groupId>
+                <artifactId>reload4j</artifactId>
+                <version>${reload4j.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>com.sun.jdmk</groupId>
@@ -1588,6 +1651,10 @@
                     <exclusion>
                         <groupId>org.apache.logging.log4j</groupId>
                         <artifactId>log4j-slf4j-impl</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
