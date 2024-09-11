@@ -61,6 +61,7 @@
             <groupId>org.apache.oozie</groupId>
             <artifactId>oozie-core</artifactId>
             <classifier>tests</classifier>
+           <version>${open.oozie.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

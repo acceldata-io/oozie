@@ -106,6 +106,7 @@
          <tez.version>0.8.4</tez.version>
          <joda.time.version>2.9.9</joda.time.version>
          <avro.version>1.8.2</avro.version>
+	 <open.oozie.version>5.2.1</open.oozie.version>
 
          <jetty.version>9.3.27.v20190418</jetty.version>
          <apache.jsp.version>8.0.33</apache.jsp.version>
