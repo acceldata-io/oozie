@@ -110,13 +110,13 @@
          <pig.classifier>h2</pig.classifier>
          <hive.classifier>core</hive.classifier>
          <sqoop.version>1.4.7</sqoop.version>
-         <spark.version>1.6.1</spark.version>
+         <spark.version>3.3.3</spark.version>
          <spark.streaming.kafka.version>1.6.1</spark.streaming.kafka.version>
          <spark.bagel.version>1.6.1</spark.bagel.version>
          <spark.guava.version>14.0.1</spark.guava.version>
-         <spark.scala.binary.version>2.10</spark.scala.binary.version>
+         <spark.scala.binary.version>2.12</spark.scala.binary.version>
          <sqoop.classifier>hadoop260</sqoop.classifier>
-         <tez.version>0.8.4</tez.version>
+         <tez.version>0.10.1</tez.version>
          <joda.time.version>2.9.9</joda.time.version>
          <avro.version>1.8.2</avro.version>
 	 <open.oozie.version>5.2.1</open.oozie.version>
@@ -2226,6 +2226,17 @@
             </activation>
             <properties>
                 <spark.version>2.1.0</spark.version>
+                <spark.streaming.kafka.version>1.6.2</spark.streaming.kafka.version>
+                <spark.bagel.version>1.6.2</spark.bagel.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>spark-3</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <spark.version>3.3.3</spark.version>
                 <spark.streaming.kafka.version>1.6.2</spark.streaming.kafka.version>
                 <spark.bagel.version>1.6.2</spark.bagel.version>
             </properties>
