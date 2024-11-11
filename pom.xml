@@ -2231,6 +2231,20 @@
             </properties>
         </profile>
         <profile>
+            <id>spark-3</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <spark3.version>3.3.3.2.3.3-2</spark3.version>
+                <spark3.guava.version>14.0.1</spark3.guava.version>
+                <spark3.scala.binary.version>2.12</spark3.scala.binary.version>
+                <spark.streaming.kafka.version>3.3.3</spark.streaming.kafka.version>
+                <spark.bagel.version>3.3.3</spark.bagel.version>
+
+            </properties>
+        </profile>
+        <profile>
             <id>tez</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
