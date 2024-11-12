@@ -135,7 +135,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-hive_${spark.scala.binary.version}</artifactId>
+            <artifactId>spark-hive_${spark3.scala.binary.version}</artifactId>
             <version>${spark3.version}</version>
             <scope>compile</scope>
             <exclusions>
@@ -195,25 +195,25 @@
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-mllib_${spark.scala.binary.version}</artifactId>
+            <artifactId>spark-mllib_${spark3.scala.binary.version}</artifactId>
             <version>${spark3.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-repl_${spark.scala.binary.version}</artifactId>
+            <artifactId>spark-repl_${spark3.scala.binary.version}</artifactId>
             <version>${spark3.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql_${spark.scala.binary.version}</artifactId>
+            <artifactId>spark-sql_${spark3.scala.binary.version}</artifactId>
             <version>${spark3.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming_${spark.scala.binary.version}</artifactId>
+            <artifactId>spark-streaming_${spark3.scala.binary.version}</artifactId>
             <version>${spark3.version}</version>
             <scope>compile</scope>
         </dependency>
