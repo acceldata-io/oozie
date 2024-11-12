@@ -67,6 +67,10 @@
             <outputDirectory>/</outputDirectory>
         </fileSet>
         <fileSet>
+            <directory>${basedir}/spark3/target/partial-sharelib</directory>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+        <fileSet>
             <directory>${basedir}/git/target/partial-sharelib</directory>
             <outputDirectory>/</outputDirectory>
         </fileSet>
