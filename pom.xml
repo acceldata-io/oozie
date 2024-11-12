@@ -115,6 +115,9 @@
          <spark.bagel.version>1.6.1</spark.bagel.version>
          <spark.guava.version>14.0.1</spark.guava.version>
          <spark.scala.binary.version>2.10</spark.scala.binary.version>
+        <spark3.version>3.3.3</spark3.version>
+        <spark3.guava.version>14.0.1</spark3.guava.version>
+        <spark3.scala.binary.version>2.10</spark3.scala.binary.version>
          <sqoop.classifier>hadoop260</sqoop.classifier>
          <tez.version>0.8.4</tez.version>
          <joda.time.version>2.9.9</joda.time.version>
