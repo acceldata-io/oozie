@@ -105,7 +105,7 @@
 
          <!-- Sharelib component versions -->
          <hive.version>1.2.2</hive.version>
-         <hive.jline.version>2.12</hive.jline.version>
+         <hive.jline.version>2.14.6</hive.jline.version>
          <pig.version>0.16.0</pig.version>
          <pig.classifier>h2</pig.classifier>
          <hive.classifier>core</hive.classifier>
@@ -113,10 +113,10 @@
          <spark.version>1.6.1</spark.version>
          <spark.streaming.kafka.version>1.6.1</spark.streaming.kafka.version>
          <spark.bagel.version>1.6.1</spark.bagel.version>
-         <spark.guava.version>14.0.1</spark.guava.version>
+         <spark.guava.version>27.0-jre</spark.guava.version>
          <spark.scala.binary.version>2.10</spark.scala.binary.version>
          <sqoop.classifier>hadoop260</sqoop.classifier>
-         <tez.version>0.8.4</tez.version>
+         <tez.version>0.10.1.3.2.3.3-2</tez.version>
          <joda.time.version>2.9.9</joda.time.version>
          <avro.version>1.8.2</avro.version>
 	 <open.oozie.version>5.2.1</open.oozie.version>
@@ -132,7 +132,7 @@
          <jackson.version>2.6.5</jackson.version>
          <log4j.version>1.2.17</log4j.version>
          <activemq.version>5.15.9</activemq.version>
-         <commons.lang3.version>3.3.2</commons.lang3.version>
+         <commons.lang3.version>3.5</commons.lang3.version>
          <httpcore.version>4.3.3</httpcore.version>
          <httpclient.version>4.3.6</httpclient.version>
          <kyro.version>2.22</kyro.version>
@@ -1488,10 +1488,9 @@
             </dependency>
 
             <dependency>
-                <groupId>org.apache.sqoop</groupId>
-                <artifactId>sqoop</artifactId>
+                <groupId>org.apache.sqoopgradle</groupId>
+                <artifactId>Sqoop</artifactId>
                 <version>${sqoop.version}</version>
-                <classifier>${sqoop.classifier}</classifier>
             </dependency>
 
             <dependency>
@@ -2225,8 +2224,8 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <spark.version>2.1.0</spark.version>
-                <spark.streaming.kafka.version>1.6.2</spark.streaming.kafka.version>
+                <spark.version>2.4.8.3.2.3.3-2</spark.version>
+                <spark.streaming.kafka.version>2.4.8.3.2.3.3-2</spark.streaming.kafka.version>
                 <spark.bagel.version>1.6.2</spark.bagel.version>
             </properties>
         </profile>
