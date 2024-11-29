@@ -40,6 +40,7 @@ import org.apache.oozie.util.ZKUtils;
  * This Service helps coordinate other Services to prevent duplicate processing of Jobs if there are multiple Oozie Servers.  This
  * implementation uses ZooKeeper and is designed to correctly deal with multiple Oozie Servers.
  * <p>
+ *     {{ NOTE (29/11/2024): ZKLockService Class deprecated to make oozie compatible with curator 5.2.0}}
  * The distributed locks provided by {@link ZKLocksService} will prevent any concurrency issues from occurring if multiple Oozie
  * Servers try to process the same job at the same time.  However, this will make Oozie slower (more waiting on locks) and will
  * place additional stress on ZooKeeper and the Database.  By "assigning" different Oozie servers to process different jobs, we can
