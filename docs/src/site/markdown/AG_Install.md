@@ -1137,7 +1137,6 @@ Multiple Oozie Servers can be configured against the same database to provide Hi
     <property>
         <name>oozie.services.ext</name>
         <value>
-            org.apache.oozie.service.ZKLocksService,
             org.apache.oozie.service.ZKXLogStreamingService,
             org.apache.oozie.service.ZKJobsConcurrencyService,
             org.apache.oozie.service.ZKUUIDService

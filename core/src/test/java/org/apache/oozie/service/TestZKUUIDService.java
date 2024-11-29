@@ -150,7 +150,7 @@ public class TestZKUUIDService extends ZKXTestCase {
     public void testResetSequence() throws Exception {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMddHHmmssSSS");
         Services service = Services.get();
-        service.setService(ZKLocksService.class);
+        //service.setService(ZKLocksService.class);
         ZKUUIDService uuid = new ZKUUIDService();
         try {
             setSystemProperty(UUIDService.CONF_GENERATOR, "counter");
@@ -173,7 +173,7 @@ public class TestZKUUIDService extends ZKXTestCase {
 
     public void testResetSequence_withMultiThread() throws Exception {
         Services service = Services.get();
-        service.setService(ZKLocksService.class);
+        //service.setService(ZKLocksService.class);
 
         final AtomicInteger result[] = new AtomicInteger[5000];
         final ZKUUIDService uuid1 = new ZKUUIDService();
