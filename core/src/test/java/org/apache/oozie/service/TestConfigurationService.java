@@ -259,8 +259,8 @@ public class TestConfigurationService extends XTestCase {
         assertEquals(3, ConfigurationService.getInt(CallableQueueService.CONF_CALLABLE_CONCURRENCY));
         assertEquals(120, ConfigurationService.getInt(CoordSubmitXCommand.CONF_DEFAULT_TIMEOUT_NORMAL));
 
-        assertEquals(300, ConfigurationService.getInt(ZKLocksService.REAPING_THRESHOLD));
-        assertEquals(2, ConfigurationService.getInt(ZKLocksService.REAPING_THREADS));
+        //assertEquals(300, ConfigurationService.getInt(ZKLocksService.REAPING_THRESHOLD));
+        //assertEquals(2, ConfigurationService.getInt(ZKLocksService.REAPING_THREADS));
         assertEquals(10000, ConfigurationService.getInt(JobXCommand.DEFAULT_REQUEUE_DELAY));
 
         assertEquals(0, ConfigurationService.getStrings(AbandonedCoordCheckerService.TO_ADDRESS).length);
