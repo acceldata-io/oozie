@@ -22,15 +22,21 @@ import java.io.FileNotFoundException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import org.apache.oozie.service.ConfigurationService;
 
 public class WebRootResourceLocator {
     private static final String WEBROOT_INDEX = "/webapp/";
+    private static final String WEBROOT_NO_UI_INDEX = "/webapp/no-ui";
 
     public URI getWebRootResourceUri() throws FileNotFoundException, URISyntaxException
     {
-        URL indexUri = JspHandler.class.getResource(WebRootResourceLocator.WEBROOT_INDEX);
-        if (indexUri == null)
-        {
+        URL indexUri;
+        if (ConfigurationService.getBoolean("oozie.ui.enabled", true)) {
+            indexUri = JspHandler.class.getResource(WebRootResourceLocator.WEBROOT_INDEX);
+        } else {
+            indexUri = JspHandler.class.getResource(WebRootResourceLocator.WEBROOT_NO_UI_INDEX);
+        }
+        if (indexUri == null) {
             throw new FileNotFoundException("Unable to find resource " + WebRootResourceLocator.WEBROOT_INDEX);
         }
         // Points to wherever /webroot/ (the resource) is
