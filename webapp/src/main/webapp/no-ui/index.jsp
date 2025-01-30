@@ -17,6 +17,6 @@
 -->
 <html>
     <body>
-        UI is disabled, please contact the administrator.
+        UI access is currently disabled. For assistance, please reach out to the system administrator.
     </body>
 </html>
