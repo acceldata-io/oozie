@@ -121,6 +121,12 @@
         </description>
     </property>
 
+    <property>
+      <name>oozie.ui.enabled</name>
+      <value>true</value>
+      <description>When set to false, the Oozie UI will be complete disabled, the Oozie server will not even expose the UI resources</description>
+    </property>
+
     <!-- Services -->
 
     <property>
