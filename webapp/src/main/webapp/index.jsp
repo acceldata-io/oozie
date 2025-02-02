@@ -23,10 +23,10 @@
         <link rel="stylesheet" type="text/css" href="oozie-console.css"/>
 
         <!-- jquery needs to be before extjs -->
-        <script type="text/javascript" charset="utf8" src="console/sla/js/table/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="console/sla/js/table/jquery-3.7.1.min.js"></script>
         <link rel="stylesheet" type="text/css" href="console/sla/css/jquery.dataTables.css">
         <script type="text/javascript" src="console/sla/js/table/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="console/sla/js/table/jquery-ui-1.10.3.custom.min.js"></script>
+        <script type="text/javascript" src="console/sla/js/table/jquery-ui.min.js"></script>
         <script type="text/javascript" src="console/sla/js/table/jquery-ui-timepicker-addon.js"></script>
         <script type="text/javascript" src="console/sla/js/graph/jquery.flot.min.js"></script>
         <script type="text/javascript" src="console/sla/js/oozie-sla.js"></script>
@@ -46,7 +46,7 @@
         </div>
         <!-- LIBS -->
 
-        <div id="Header" style="padding:2">
+        <div id="Header" style="padding:2px">
            <img src="./oozie_50x.png" height="16" width="70"/>
            <a href="./docs/index.html" target="bottom">Documentation</a>
         </div>
