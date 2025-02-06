@@ -1320,7 +1320,7 @@ public class JavaActionExecutor extends ActionExecutor {
                 + "/bin/java");
 
         vargs.add("-Dlog4j.configuration=container-log4j.properties");
-        vargs.add("-Dlog4j.debug=true");
+        vargs.add("-Dlog4j.debug="+launcherJobConf.get(LauncherAM.OOZIE_LAUNCHER_DEBUG_ENABLE));
         vargs.add("-D" + YarnConfiguration.YARN_APP_CONTAINER_LOG_DIR + "=" + ApplicationConstants.LOG_DIR_EXPANSION_VAR);
         vargs.add("-D" + YarnConfiguration.YARN_APP_CONTAINER_LOG_SIZE + "=" + 1024 * 1024);
         vargs.add("-Dhadoop.root.logger=" + launcherLogLevel + ",CLA");
