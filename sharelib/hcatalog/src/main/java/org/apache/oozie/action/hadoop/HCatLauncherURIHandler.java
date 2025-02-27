@@ -24,9 +24,9 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
-
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hive.conf.HiveConf;
+import org.apache.hadoop.hive.metastore.conf.MetastoreConf;
 import org.apache.hadoop.security.UserGroupInformation;
 import org.apache.hive.hcatalog.api.ConnectionFailureException;
 import org.apache.hive.hcatalog.api.HCatClient;
@@ -84,7 +84,9 @@ public class HCatLauncherURIHandler implements LauncherURIHandler {
         if (!serverURI.equals("")) {
             hiveConf.set("hive.metastore.local", "false");
         }
-        hiveConf.set(HiveConf.ConfVars.METASTOREURIS.varname, serverURI);
+
+
+        hiveConf.set(MetastoreConf.ConfVars.THRIFT_URIS.getVarname(), serverURI);
         try {
             System.out.println("Creating HCatClient for user=" + UserGroupInformation.getCurrentUser() + " and server="
                     + serverURI);

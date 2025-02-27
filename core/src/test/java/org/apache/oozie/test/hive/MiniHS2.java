@@ -32,6 +32,7 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.hive.conf.HiveConf;
 import org.apache.hadoop.hive.conf.HiveConf.ConfVars;
 import org.apache.hadoop.hive.metastore.HiveMetaStore;
+import org.apache.hadoop.hive.metastore.utils.MetaStoreServerUtils;
 import org.apache.hadoop.hive.metastore.utils.MetaStoreUtils;
 import org.apache.hadoop.hive.shims.HadoopShims.MiniDFSShim;
 import org.apache.hadoop.hive.shims.HadoopShims.MiniMrShim;
@@ -66,7 +67,7 @@ public class MiniHS2 extends AbstractHiveService {
     // a process to run a shell script (that we don't have) to run Hadoop jobs.  And we didn't want to use normal mode because that
     // creates Mini MR and DFS clusters, which we already have setup for Oozie.  Our hacking here involved deleting the Hive Mini
     // MR/DFS cluster code and passing in our jobConf in the hiveConf so that HS2 would use our Mini MR/DFS cluster.
-    super(hiveConf, "localhost", MetaStoreUtils.findFreePort(), MetaStoreUtils.findFreePort());
+    super(hiveConf, "localhost", MetaStoreServerUtils.findFreePort(), MetaStoreServerUtils.findFreePort());
     baseDir =  Files.createTempDir();
     baseDfsDir =  new Path(new Path(fs.getUri()), "/base");
     String metaStoreURL =  "jdbc:derby:" + baseDir.getAbsolutePath() + File.separator + "test_metastore-" +
@@ -76,10 +77,10 @@ public class MiniHS2 extends AbstractHiveService {
     Path wareHouseDir = new Path(baseDfsDir, "warehouse");
     fs.mkdirs(wareHouseDir);
     setWareHouseDir(wareHouseDir.toString());
-    System.setProperty(HiveConf.ConfVars.METASTORECONNECTURLKEY.varname, metaStoreURL);
-    hiveConf.setVar(HiveConf.ConfVars.METASTORECONNECTURLKEY, metaStoreURL);
+    System.setProperty(HiveConf.ConfVars.METASTORE_CONNECT_URL_KEY.varname, metaStoreURL);
+    hiveConf.setVar(HiveConf.ConfVars.METASTORE_CONNECT_URL_KEY, metaStoreURL);
     // reassign a new port, just in case if one of the MR services grabbed the last one
-    setBinaryPort(MetaStoreUtils.findFreePort());
+    setBinaryPort(MetaStoreServerUtils.findFreePort());
     hiveConf.setVar(ConfVars.HIVE_SERVER2_TRANSPORT_MODE, HS2_BINARY_MODE);
     hiveConf.setVar(ConfVars.HIVE_SERVER2_THRIFT_BIND_HOST, getHost());
     hiveConf.setIntVar(ConfVars.HIVE_SERVER2_THRIFT_PORT, getBinaryPort());
@@ -87,8 +88,8 @@ public class MiniHS2 extends AbstractHiveService {
 
     Path scratchDir = new Path(baseDfsDir, "scratch");
     fs.mkdirs(scratchDir);
-    System.setProperty(HiveConf.ConfVars.SCRATCHDIR.varname, scratchDir.toString());
-    System.setProperty(HiveConf.ConfVars.LOCALSCRATCHDIR.varname,
+    System.setProperty(HiveConf.ConfVars.SCRATCH_DIR.varname, scratchDir.toString());
+    System.setProperty(HiveConf.ConfVars.LOCAL_SCRATCH_DIR.varname,
         baseDir.getPath() + File.separator + "scratch");
   }
 
