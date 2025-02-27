@@ -31,6 +31,7 @@ import java.util.Set;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hive.conf.HiveConf;
+import org.apache.hadoop.hive.metastore.conf.MetastoreConf;
 import org.apache.hadoop.security.UserGroupInformation;
 import org.apache.hive.hcatalog.api.ConnectionFailureException;
 import org.apache.hive.hcatalog.api.HCatClient;
@@ -251,7 +252,7 @@ public class HCatURIHandler implements URIHandler {
         if (!serverURI.equals("")) {
             hiveConf.set("hive.metastore.local", "false");
         }
-        hiveConf.set(HiveConf.ConfVars.METASTOREURIS.varname, serverURI);
+        hiveConf.set(MetastoreConf.ConfVars.THRIFT_URIS.getVarname(), serverURI);
         return hiveConf;
     }
 
@@ -259,7 +260,7 @@ public class HCatURIHandler implements URIHandler {
         HiveConf hiveConf = getHiveConf(uri, conf);
         try {
             XLog.getLog(HCatURIHandler.class).info("Creating HCatClient for login_user [{0}] and server [{1}] ",
-                    UserGroupInformation.getLoginUser(), hiveConf.get(HiveConf.ConfVars.METASTOREURIS.varname));
+                    UserGroupInformation.getLoginUser(), hiveConf.get(MetastoreConf.ConfVars.THRIFT_URIS.getVarname()));
             return HCatClient.create(hiveConf);
         }
         catch (HCatException e) {
@@ -300,7 +301,7 @@ public class HCatURIHandler implements URIHandler {
             }
             XLog.getLog(HCatURIHandler.class).info(
                     "Creating HCatClient for user [{0}] login_user [{1}] and server [{2}] ", user,
-                    UserGroupInformation.getLoginUser(), hiveConf.get(HiveConf.ConfVars.METASTOREURIS.varname));
+                    UserGroupInformation.getLoginUser(), hiveConf.get(MetastoreConf.ConfVars.THRIFT_URIS.getVarname()));
             HCatClient hcatClient = ugi.doAs(new PrivilegedExceptionAction<HCatClient>() {
                 @Override
                 public HCatClient run() throws Exception {
