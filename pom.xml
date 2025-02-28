@@ -126,7 +126,7 @@
 
          <jline.version>0.9.94</jline.version>
          <openjpa.version>3.1.0</openjpa.version>
-         <derby.version>10.15.1.3</derby.version>
+         <derby.version>10.14.2.0</derby.version>
          <xerces.version>2.11.0</xerces.version>
          <curator.version>2.13.0</curator.version>
          <jackson.version>2.15.2</jackson.version>
