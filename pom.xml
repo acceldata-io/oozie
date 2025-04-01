@@ -96,7 +96,7 @@
         <hadoop.version>3.3.6.3.3.6.1-1</hadoop.version>
         <hadoop.majorversion>2</hadoop.majorversion>
         <hadooplib.version>hadoop-${hadoop.majorversion}-${project.version}</hadooplib.version>
-        <hbase.version>1.2.3</hbase.version>
+        <hbase.version>2.6.2.3.3.6.1-1</hbase.version>
 
         <dropwizard.metrics.version>3.1.2</dropwizard.metrics.version>
 
@@ -109,7 +109,7 @@
          <pig.version>0.16.0</pig.version>
          <pig.classifier>h2</pig.classifier>
          <hive.classifier>core</hive.classifier>
-         <sqoop.version>1.4.7</sqoop.version>
+         <sqoop.version>1.4.8.3.3.6.1-1</sqoop.version>
          <spark.version>3.5.1.3.3.6.1-1</spark.version>
          <spark.streaming.kafka.version>${spark.version}</spark.streaming.kafka.version>
          <spark.bagel.version>${spark.version}</spark.bagel.version>
@@ -128,7 +128,7 @@
          <openjpa.version>3.1.0</openjpa.version>
          <derby.version>10.14.2.0</derby.version>
          <xerces.version>2.11.0</xerces.version>
-         <curator.version>2.13.0</curator.version>
+         <curator.version>5.2.0</curator.version>
          <jackson.version>2.15.2</jackson.version>
          <log4j.version>1.2.17</log4j.version>
          <reload4j.version>1.2.25</reload4j.version>
