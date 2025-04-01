@@ -1572,10 +1572,9 @@
             </dependency>
 
             <dependency>
-                <groupId>org.apache.sqoop</groupId>
-                <artifactId>sqoop</artifactId>
+                <groupId>org.apache.sqoopgradle</groupId>
+                <artifactId>Sqoop</artifactId>
                 <version>${sqoop.version}</version>
-                <classifier>${sqoop.classifier}</classifier>
             </dependency>
 
             <dependency>

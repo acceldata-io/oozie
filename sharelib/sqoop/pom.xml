@@ -164,6 +164,14 @@
                     <groupId>stax</groupId>
                     <artifactId>stax-api</artifactId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>ch.qos.logback</artifactId>
+                    <groupId>logback-core</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>ch.qos.logback</artifactId>
+                    <groupId>logback-classic</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -192,14 +200,6 @@
                 <exclusion>
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>ch.qos.logback</artifactId>
-                    <groupId>logback-core</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>ch.qos.logback</artifactId>
-                    <groupId>logback-classic</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
