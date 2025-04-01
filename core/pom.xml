@@ -558,6 +558,12 @@
             <groupId>org.apache.hive</groupId>
             <artifactId>hive-service</artifactId>
             <version>${hive.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.pac4j</groupId>
+                    <artifactId>pac4j-saml-opensamlv3</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>net.jcip</groupId>
