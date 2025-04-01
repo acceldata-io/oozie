@@ -94,7 +94,7 @@
         <oozie.test.config.file>${oozie.test.default.config.file}</oozie.test.config.file>
 
         <hadoop.version>3.3.6.3.3.6.1-1</hadoop.version>
-        <hadoop.majorversion>2</hadoop.majorversion>
+        <hadoop.majorversion>3</hadoop.majorversion>
         <hadooplib.version>hadoop-${hadoop.majorversion}-${project.version}</hadooplib.version>
         <hbase.version>2.6.2.3.3.6.1-1</hbase.version>
 
