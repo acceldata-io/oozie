@@ -564,8 +564,8 @@
                     <artifactId>pac4j-saml-opensamlv3</artifactId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>org.apache.logging.log4j</artifactId>
-                    <groupId>log4j-slf4j-impl</groupId>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-slf4j-impl</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>

@@ -165,12 +165,12 @@
                     <artifactId>stax-api</artifactId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>ch.qos.logback</artifactId>
-                    <groupId>logback-core</groupId>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>ch.qos.logback</artifactId>
-                    <groupId>logback-classic</groupId>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-core</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
