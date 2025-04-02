@@ -32,18 +32,18 @@
     <name>Apache Oozie Main</name>
     <packaging>pom</packaging>
 
-<distributionManagement>
-    <repository>
-      <id>nexus-releases</id>
-      <name>Releases</name>
-     <url>https://repo1.acceldata.dev/repository/odp-release/</url>
-   </repository>
-   <snapshotRepository>
-     <id>nexus-snapshots</id>
-     <name>Snapshot</name>
-     <url>https://repo1.acceldata.dev/repository/odp-snapshot/</url>
-   </snapshotRepository>
- </distributionManagement>
+    <distributionManagement>
+        <repository>
+          <id>nexus-releases</id>
+          <name>Releases</name>
+         <url>https://repo1.acceldata.dev/repository/odp-staging-release/</url>
+        </repository>
+        <snapshotRepository>
+         <id>nexus-snapshots</id>
+         <name>Snapshot</name>
+         <url>https://repo1.acceldata.dev/repository/odp-staging-snapshot/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <licenses>
         <license>
