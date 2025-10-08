@@ -121,7 +121,7 @@
          <avro.version>1.8.2</avro.version>
 	 <open.oozie.version>5.2.1</open.oozie.version>
 
-         <jetty.version>9.3.27.v20190418</jetty.version>
+         <jetty.version>9.4.57.v20241219</jetty.version>
          <apache.jsp.version>8.0.33</apache.jsp.version>
 
          <jline.version>0.9.94</jline.version>
