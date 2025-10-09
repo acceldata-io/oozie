@@ -144,6 +144,7 @@
          <spotbugs.version>3.1.11</spotbugs.version>
          <powermock.version>2.0.2</powermock.version>
          <guava.version>32.0.1-jre</guava.version>
+        <libthrift.version>0.9.3-1</libthrift.version>
     </properties>
 
     <modules>
@@ -1862,6 +1863,13 @@
                 <artifactId>commons-beanutils</artifactId>
                 <version>1.9.4</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.apache.thrift</groupId>
+                <artifactId>libthrift</artifactId>
+                <version>${libthrift.version}}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
