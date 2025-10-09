@@ -159,6 +159,10 @@
                     <groupId>stax</groupId>
                     <artifactId>stax-api</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.apache.thrift</groupId>
+                    <artifactId>libthrift</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
