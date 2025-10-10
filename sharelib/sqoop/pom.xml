@@ -163,6 +163,10 @@
                     <groupId>org.apache.thrift</groupId>
                     <artifactId>libthrift</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.apache.accumulo</groupId>
+                    <artifactId>accumulo-minicluster</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
