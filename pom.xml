@@ -145,7 +145,8 @@
          <powermock.version>2.0.2</powermock.version>
          <guava.version>32.0.1-jre</guava.version>
          <snappy-java.version>1.1.10.4</snappy-java.version>
-        <commons-vfs2.version>2.10.0</commons-vfs2.version>
+         <libthrift.version>0.9.3-1</libthrift.version>
+         <commons-vfs2.version>2.10.0</commons-vfs2.version>
     </properties>
 
     <modules>
@@ -1741,6 +1742,14 @@
                         <groupId>org.apache.xmlgraphics</groupId>
                         <artifactId>batik-svgrasterizer</artifactId>
                     </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.xmlgraphics</groupId>
+                        <artifactId>batik-bridge</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.xmlgraphics</groupId>
+                        <artifactId>batik-transcoder</artifactId>
+                    </exclusion>
                 </exclusions>
             </dependency>
 
@@ -1880,7 +1889,7 @@
             <dependency>
                 <groupId>org.apache.thrift</groupId>
                 <artifactId>libthrift</artifactId>
-                <version>${libthrift.version}}</version>
+                <version>${libthrift.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
