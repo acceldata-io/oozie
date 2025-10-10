@@ -233,6 +233,12 @@
                 <groupId>org.apache.oozie</groupId>
                 <artifactId>oozie-core</artifactId>
                 <version>${project.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.mina</groupId>
+                        <artifactId>mina-core</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.apache.oozie</groupId>
@@ -1147,6 +1153,10 @@
                         <groupId>hadoop</groupId>
                         <artifactId>core</artifactId>
                     </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.mina</groupId>
+                        <artifactId>mina-core</artifactId>
+                    </exclusion>
                 </exclusions>
             </dependency>
 
@@ -1362,6 +1372,10 @@
                     <exclusion>
                         <groupId>org.apache.logging.log4j</groupId>
                         <artifactId>log4j-slf4j-impl</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.mina</groupId>
+                        <artifactId>mina-core</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
