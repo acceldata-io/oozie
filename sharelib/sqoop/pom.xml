@@ -167,10 +167,13 @@
                     <groupId>org.apache.accumulo</groupId>
                     <artifactId>accumulo-minicluster</artifactId>
                 </exclusion>
-                <exclusion>
                     <groupId>org.apache.calcite</groupId>
                     <artifactId>calcite-core</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.yaml</groupId>
+                    <artifactId>snakeyaml</artifactId>
+               </exclusion> 
             </exclusions>
         </dependency>
         <dependency>
