@@ -96,7 +96,7 @@
         <hadoop.version>3.2.3.3.2.3.4-2003</hadoop.version>
         <hadoop.majorversion>3</hadoop.majorversion>
         <hadooplib.version>hadoop-${hadoop.majorversion}-${project.version}</hadooplib.version>
-        <hbase.version>2.6.2.3.2.3.4-2003</hbase.version>
+        <hbase.version>2.5.10.3.2.3.4-2003</hbase.version>
 
         <dropwizard.metrics.version>3.1.2</dropwizard.metrics.version>
 
