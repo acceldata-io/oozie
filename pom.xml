@@ -597,10 +597,6 @@
                         <artifactId>oro</artifactId>
                     </exclusion>
                     <exclusion>
-                        <groupId>org.eclipse.jdt</groupId>
-                        <artifactId>core</artifactId>
-                    </exclusion>
-                    <exclusion>
                         <groupId>org.codehaus.jackson</groupId>
                         <artifactId>jackson-mapper-asl</artifactId>
                     </exclusion>
@@ -873,10 +869,6 @@
                         <artifactId>hsqldb</artifactId>
                     </exclusion>
                     <exclusion>
-                        <groupId>org.eclipse.jdt</groupId>
-                        <artifactId>core</artifactId>
-                    </exclusion>
-                    <exclusion>
                         <groupId>jline</groupId>
                         <artifactId>jline</artifactId>
                     </exclusion>
@@ -977,6 +969,13 @@
                         <artifactId>postgresql</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.jdt</groupId>
+                <artifactId>ecj</artifactId>
+                <version>3.26.0</version>
+                <scope>runtime</scope>
             </dependency>
 
             <dependency>
