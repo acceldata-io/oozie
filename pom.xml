@@ -36,12 +36,12 @@
     <repository>
       <id>nexus-releases</id>
       <name>Releases</name>
-     <url>https://repo1.acceldata.dev/repository/odp-release/</url>
+     <url>https://repo1.acceldata.dev/repository/odp-staging-release/</url>
    </repository>
    <snapshotRepository>
      <id>nexus-snapshots</id>
      <name>Snapshot</name>
-     <url>https://repo1.acceldata.dev/repository/odp-snapshot/</url>
+     <url>https://repo1.acceldata.dev/repository/odp-staging-snapshot/</url>
    </snapshotRepository>
  </distributionManagement>
 
@@ -167,7 +167,7 @@
     <repository>
             <id>acceldata repo</id>
             <name>acceldata repo</name>
-            <url>https://repo1.acceldata.dev/repository/odp-central/</url>
+            <url>https://repo1.acceldata.dev/repository/odp-staging-central/</url>
             <releases>
         <enabled>true</enabled>
       </releases>
@@ -201,7 +201,7 @@
     <repository>
             <id>acceldata snap repo</id>
             <name>acceldata snap repo</name>
-            <url>https://repo1.acceldata.dev/repository/odp-snapshot/</url>
+            <url>https://repo1.acceldata.dev/repository/odp-staging-snapshot/</url>
             <releases>
         <enabled>true</enabled>
       </releases>
