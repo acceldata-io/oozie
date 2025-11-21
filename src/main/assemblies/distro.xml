@@ -88,6 +88,7 @@
                     <include>**/javax.servlet-api-3.1.0.jar</include>
                     <include>**/taglibs-*jar</include>
                     <include>**/org.eclipse.jdt.core-*jar</include>
+                    <include>**/ecj-*.jar</include>                  
                 </includes>
         </fileSet>
         <fileSet>
