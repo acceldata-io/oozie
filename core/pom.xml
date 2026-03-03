@@ -469,7 +469,6 @@
             <groupId>org.apache.oozie</groupId>
             <artifactId>oozie-fluent-job-api</artifactId>
             <classifier>tests</classifier>
-            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
 
