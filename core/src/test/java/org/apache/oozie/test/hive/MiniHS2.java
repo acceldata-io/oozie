@@ -22,6 +22,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicLong;
@@ -31,20 +32,16 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.hive.conf.HiveConf;
 import org.apache.hadoop.hive.conf.HiveConf.ConfVars;
-import org.apache.hadoop.hive.metastore.HiveMetaStore;
-import org.apache.hadoop.hive.metastore.utils.MetaStoreUtils;
 import org.apache.hadoop.hive.shims.HadoopShims.MiniDFSShim;
 import org.apache.hadoop.hive.shims.HadoopShims.MiniMrShim;
-import org.apache.hadoop.hive.shims.ShimLoader;
 import org.apache.hive.service.Service;
 import org.apache.hive.service.cli.CLIServiceClient;
 import org.apache.hive.service.cli.SessionHandle;
 import org.apache.hive.service.cli.thrift.ThriftBinaryCLIService;
 import org.apache.hive.service.cli.thrift.ThriftCLIServiceClient;
 import org.apache.hive.service.cli.thrift.ThriftHttpCLIService;
+import org.apache.hive.service.rpc.thrift.TCLIService;
 import org.apache.hive.service.server.HiveServer2;
-
-import com.google.common.io.Files;
 
 // TODO: This class and AbstractHiveService are copied from the org.apache.hive.jdbc package in Hive 13.1; we can remove them once
 // Hive publishes its "hive-it-unit" artifact to maven.
@@ -66,8 +63,8 @@ public class MiniHS2 extends AbstractHiveService {
     // a process to run a shell script (that we don't have) to run Hadoop jobs.  And we didn't want to use normal mode because that
     // creates Mini MR and DFS clusters, which we already have setup for Oozie.  Our hacking here involved deleting the Hive Mini
     // MR/DFS cluster code and passing in our jobConf in the hiveConf so that HS2 would use our Mini MR/DFS cluster.
-    super(hiveConf, "localhost", MetaStoreUtils.findFreePort(), MetaStoreUtils.findFreePort());
-    baseDir =  Files.createTempDir();
+    super(hiveConf, "localhost", findFreePort(), findFreePort());
+    baseDir =  createTempDir();
     baseDfsDir =  new Path(new Path(fs.getUri()), "/base");
     String metaStoreURL =  "jdbc:derby:" + baseDir.getAbsolutePath() + File.separator + "test_metastore-" +
         hs2Counter.incrementAndGet() + ";create=true";
@@ -79,7 +76,7 @@ public class MiniHS2 extends AbstractHiveService {
     System.setProperty(HiveConf.ConfVars.METASTORECONNECTURLKEY.varname, metaStoreURL);
     hiveConf.setVar(HiveConf.ConfVars.METASTORECONNECTURLKEY, metaStoreURL);
     // reassign a new port, just in case if one of the MR services grabbed the last one
-    setBinaryPort(MetaStoreUtils.findFreePort());
+    setBinaryPort(findFreePort());
     hiveConf.setVar(ConfVars.HIVE_SERVER2_TRANSPORT_MODE, HS2_BINARY_MODE);
     hiveConf.setVar(ConfVars.HIVE_SERVER2_THRIFT_BIND_HOST, getHost());
     hiveConf.setIntVar(ConfVars.HIVE_SERVER2_THRIFT_PORT, getBinaryPort());
@@ -131,10 +128,10 @@ public class MiniHS2 extends AbstractHiveService {
   public CLIServiceClient getServiceClientInternal() {
     for (Service service : hiveServer2.getServices()) {
       if (service instanceof ThriftBinaryCLIService) {
-        return new ThriftCLIServiceClient((ThriftBinaryCLIService) service);
+        return new ThriftCLIServiceClient((TCLIService.Iface) service);
       }
       if (service instanceof ThriftHttpCLIService) {
-        return new ThriftCLIServiceClient((ThriftHttpCLIService) service);
+        return new ThriftCLIServiceClient((TCLIService.Iface) service);
       }
     }
     throw new IllegalStateException("HiveServer2 not running Thrift service");
@@ -184,6 +181,19 @@ public class MiniHS2 extends AbstractHiveService {
 
   public MiniDFSShim getDFS() {
     return dfs;
+  }
+
+  private static int findFreePort() throws IOException {
+    try (ServerSocket socket = new ServerSocket(0)) {
+      return socket.getLocalPort();
+    }
+  }
+
+  private static File createTempDir() throws IOException {
+    File tempDir = File.createTempFile("minihs2-", "-tmp");
+    tempDir.delete();
+    tempDir.mkdirs();
+    return tempDir;
   }
 
   private void waitForStartup() throws Exception {
