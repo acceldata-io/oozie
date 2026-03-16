@@ -21,7 +21,7 @@ package org.apache.oozie.util.graph;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import guru.nidi.graphviz.attribute.Color;
-import guru.nidi.graphviz.attribute.RankDir;
+import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.engine.Engine;
 import guru.nidi.graphviz.engine.Format;
@@ -58,7 +58,7 @@ public class GraphvizRenderer implements GraphRenderer {
     private static final ExecutorService EXECUTOR_SERVICE = Executors.newSingleThreadExecutor();
     private static final long GRAPHVIZ_TIMEOUT_SECONDS = ConfigurationService.getLong("oozie.graphviz.timeout.seconds");
 
-    private Graph graphvizGraph = Factory.graph().graphAttr().with(RankDir.TOP_TO_BOTTOM).directed();
+    private Graph graphvizGraph = Factory.graph().graphAttr().with(Rank.dir(Rank.RankDir.TOP_TO_BOTTOM)).directed();
     private final Map<String, Node> graphvizNodes = new LinkedHashMap<>();
     private final Multimap<String, String> edges = ArrayListMultimap.create();
     private int arcCount = 0;
