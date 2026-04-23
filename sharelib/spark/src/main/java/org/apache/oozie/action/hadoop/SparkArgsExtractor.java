@@ -583,4 +583,17 @@ class SparkArgsExtractor {
         }
         return keytabNotToAdd;
     }
+
+    /**
+     * Gets the keytab string which is either the name of the keytab when full path is given or the symlink if not.
+     */
+    private String geKeytabNotToAdd(){
+        String keytabNotToAdd;
+        if (isKeytabsFullPathPresentInSparkArgs) {
+            keytabNotToAdd = keytabFileNameInSparkArgs;
+        } else {
+            keytabNotToAdd = keytabSymlinkNameInSparkArgs;
+        }
+        return keytabNotToAdd;
+    }
 }
