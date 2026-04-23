@@ -67,6 +67,7 @@ class SparkArgsExtractor {
     private static final String JOB_NAME_OPTION = "--name";
     private static final String CLASS_NAME_OPTION = "--class";
     private static final String VERBOSE_OPTION = "--verbose";
+    private static final String KEYTAB_OPTION = "--keytab";
     private static final String DRIVER_CLASSPATH_OPTION = "--driver-class-path";
     private static final String EXECUTOR_CLASSPATH = "spark.executor.extraClassPath=";
     private static final String DRIVER_CLASSPATH = "spark.driver.extraClassPath=";
@@ -90,6 +91,10 @@ class SparkArgsExtractor {
     static final String SPARK_DEFAULTS_GENERATED_PROPERTIES = "spark-defaults-oozie-generated.properties";
 
     private boolean pySpark = false;
+    boolean isKeytabPresentInSparkArgs = false;
+    boolean isKeytabsFullPathPresentInSparkArgs = false;
+    String keytabSymlinkNameInSparkArgs;
+    String keytabFileNameInSparkArgs;
     private final Configuration actionConf;
 
     SparkArgsExtractor(final Configuration actionConf) {
@@ -151,6 +156,7 @@ class SparkArgsExtractor {
         final StringBuilder executorClassPath = new StringBuilder();
         final StringBuilder userFiles = new StringBuilder();
         final StringBuilder userArchives = new StringBuilder();
+        String keytabAlias = null;
         final String sparkOpts = actionConf.get(SparkActionExecutor.SPARK_OPTS);
         String propertiesFile = null;
         if (StringUtils.isNotEmpty(sparkOpts)) {
@@ -243,6 +249,21 @@ class SparkArgsExtractor {
                     userArchives.append(userArchive);
                     addToSparkArgs = false;
                 }
+                if (opt.equals(KEYTAB_OPTION) && i + 1 < sparkOptions.size()) {
+                    keytabAlias = new Path(sparkOptions.get(i + 1)).getName();
+                } else if (opt.startsWith(KEYTAB_OPTION + OPT_SEPARATOR)) {
+                    keytabAlias = new Path(opt.substring(KEYTAB_OPTION.length() + OPT_SEPARATOR.length())).getName();
+                }
+                if (opt.startsWith(KEYTAB_OPTION)) {
+                    isKeytabPresentInSparkArgs = true;
+                    Path keytabValueInSparkArgs = new Path(sparkOptions.get(i + 1));
+                    if (keytabValueInSparkArgs.isAbsolute()) {
+                        isKeytabsFullPathPresentInSparkArgs = true;
+                        keytabFileNameInSparkArgs = keytabValueInSparkArgs.getName();
+                    } else {
+                        keytabSymlinkNameInSparkArgs = keytabValueInSparkArgs.toString();
+                    }
+                }
                 if (addToSparkArgs) {
                     sparkArgs.add(opt);
                 }
@@ -308,11 +329,23 @@ class SparkArgsExtractor {
         mergeAndAddPropertiesFile(sparkArgs, propertiesFile);
 
         if ((yarnClusterMode || yarnClientMode)) {
-            final Map<String, URI> fixedFileUrisMap =
-                    SparkMain.fixFsDefaultUrisAndFilterDuplicates(DistributedCache.getCacheFiles(actionConf));
+            final Map<String, URI> fixedFileUrisMap;
+            if (isKeytabPresentInSparkArgs) {
+                fixedFileUrisMap =
+                        SparkMain.fixFsDefaultUrisAndFilterDuplicates(DistributedCache.getCacheFiles(actionConf), geKeytabNotToAdd());
+            } else {
+                fixedFileUrisMap =
+                        SparkMain.fixFsDefaultUrisAndFilterDuplicates(DistributedCache.getCacheFiles(actionConf));
+            }
             fixedFileUrisMap.put(SparkMain.SPARK_LOG4J_PROPS, new Path(SparkMain.SPARK_LOG4J_PROPS).toUri());
             fixedFileUrisMap.put(SparkMain.HIVE_SITE_CONF, new Path(SparkMain.HIVE_SITE_CONF).toUri());
             addUserDefined(userFiles.toString(), fixedFileUrisMap);
+            // When --keytab is specified Spark YARN client adds the keytab to the distributed cache
+            // itself for Kerberos token renewal. Remove it from --files to prevent a duplicate entry.
+            if (keytabAlias != null && fixedFileUrisMap.remove(keytabAlias) != null) {
+                System.out.println("Removed keytab '" + keytabAlias + "' from --files; "
+                        + "Spark YARN client will distribute it via --keytab.");
+            }
             final Collection<URI> fixedFileUris = fixedFileUrisMap.values();
             final JarFilter jarFilter = new JarFilter(fixedFileUris, jarPath);
             jarFilter.filter();
@@ -535,5 +568,18 @@ class SparkArgsExtractor {
             sparkArgs.add(CONF_OPTION);
             sparkArgs.add(SPARK_YARN_JARS + OPT_SEPARATOR + sparkYarnJar);
         }
+    }
+
+    /**
+     * Gets the keytab string which is either the name of the keytab when full path is given, or the symlink if not.
+     */
+    private String geKeytabNotToAdd(){
+        String keytabNotToAdd;
+        if (isKeytabsFullPathPresentInSparkArgs) {
+            keytabNotToAdd = keytabFileNameInSparkArgs;
+        } else {
+            keytabNotToAdd = keytabSymlinkNameInSparkArgs;
+        }
+        return keytabNotToAdd;
     }
 }
