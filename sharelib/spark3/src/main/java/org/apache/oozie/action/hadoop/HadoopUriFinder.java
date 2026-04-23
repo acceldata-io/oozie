@@ -27,29 +27,14 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 class HadoopUriFinder {
-
-    private static final Pattern JAR_VERSION_PATTERN =
-            Pattern.compile("spark-yarn(?:_\\d+\\.\\d+)?[_-](\\d+\\.\\d+)");
 
     static String getJarVersion(final File jarFile) throws IOException {
         try (final JarFile openedJarFile = new JarFile(jarFile)) {
             final Manifest manifest = openedJarFile.getManifest();
-            final String specVersion = manifest.getMainAttributes().getValue("Specification-Version");
-            if (specVersion != null && !specVersion.equals("0.0")) {
-                return specVersion;
-            }
+            return manifest.getMainAttributes().getValue("Specification-Version");
         }
-        // Manifest Specification-Version is absent or unreliable ("0.0" in HDP JARs);
-        // fall back to extracting the leading version number from the filename.
-        final Matcher m = JAR_VERSION_PATTERN.matcher(jarFile.getName());
-        if (m.find()) {
-            return m.group(1);
-        }
-        return "0.0";
     }
 
     static URI getFixedUri(final URI fileUri) throws URISyntaxException, IOException {

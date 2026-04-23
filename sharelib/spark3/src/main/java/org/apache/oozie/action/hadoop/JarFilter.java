@@ -71,15 +71,10 @@ class JarFilter {
                 matchedFile = SparkMain.getMatchingFile(SparkMain.SPARK_ASSEMBLY_JAR_PATTERN);
             }
             if (matchedFile != null) {
+                sparkYarnJar = uri.toString();
                 try {
-                    final String detectedVersion = HadoopUriFinder.getJarVersion(matchedFile);
-                    // Prefer the first spark-yarn JAR found (spark3 sharelib JARs precede spark2
-                    // JARs in the distributed-cache file list, so the first match is the right one).
-                    if (sparkYarnJar == null) {
-                        sparkYarnJar = uri.toString();
-                        sparkVersion = detectedVersion;
-                        System.out.println("Spark Version " + sparkVersion);
-                    }
+                    sparkVersion = HadoopUriFinder.getJarVersion(matchedFile);
+                    System.out.println("Spark Version " + sparkVersion);
                 }
                 catch (final IOException io) {
                     System.out.println(
