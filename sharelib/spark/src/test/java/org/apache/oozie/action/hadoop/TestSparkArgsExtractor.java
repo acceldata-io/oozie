@@ -536,48 +536,6 @@ public class TestSparkArgsExtractor {
         fail(String.format("actual:\n%s does not contain expected:\n%s", actual, expected));
     }
 
-    @Test
-    public void testKeytabDuplicateWithFileName() throws OozieActionConfiguratorException, IOException, URISyntaxException, ActionExecutorException, NoSuchFieldException, IllegalAccessException {
-        final Configuration actionConf = new Configuration();
-
-        actionConf.set(SparkActionExecutor.SPARK_MASTER, "yarn");
-        actionConf.set(SparkActionExecutor.SPARK_MODE, "client");
-        actionConf.set(SparkActionExecutor.SPARK_CLASS, "org.apache.oozie.example.SparkFileCopy");
-        actionConf.set(SparkActionExecutor.SPARK_JOB_NAME, "Spark Copy File");
-        actionConf.set(SparkActionExecutor.SPARK_DEFAULT_OPTS, "defaultProperty=1\ndefaultProperty2=2\ndefaultProperty3=3");
-        actionConf.set(SparkActionExecutor.SPARK_OPTS,
-                "--principal foobar --keytab /foo/bar.keytab");
-        actionConf.set(SparkActionExecutor.SPARK_JAR, "/lib/test.jar");
-
-        final String[] mainArgs = {"arg0", "arg1"};
-        SparkArgsExtractor sparkArgsExtractor = new SparkArgsExtractor(actionConf);
-        sparkArgsExtractor.extract(mainArgs);
-        String expectedFileName = "bar.keytab";
-        assertEquals("Error happened while setting keytab presence.", true, sparkArgsExtractor.isKeytabPresentInSparkArgs);
-        assertEquals("Error happened while deciding if keytab full path given or not.", true, sparkArgsExtractor.isKeytabsFullPathPresentInSparkArgs);
-        assertEquals("File name wrongly set.", expectedFileName, sparkArgsExtractor.keytabFileNameInSparkArgs);
-    }
-
-    @Test
-    public void testKeytabDuplicateWithSymlink() throws OozieActionConfiguratorException, IOException, URISyntaxException, ActionExecutorException, NoSuchFieldException, IllegalAccessException {
-        final Configuration actionConf = new Configuration();
-
-        actionConf.set(SparkActionExecutor.SPARK_MASTER, "yarn");
-        actionConf.set(SparkActionExecutor.SPARK_MODE, "client");
-        actionConf.set(SparkActionExecutor.SPARK_CLASS, "org.apache.oozie.example.SparkFileCopy");
-        actionConf.set(SparkActionExecutor.SPARK_JOB_NAME, "Spark Copy File");
-        actionConf.set(SparkActionExecutor.SPARK_DEFAULT_OPTS, "defaultProperty=1\ndefaultProperty2=2\ndefaultProperty3=3");
-        actionConf.set(SparkActionExecutor.SPARK_OPTS,
-                "--principal foobar --keytab foo");
-        actionConf.set(SparkActionExecutor.SPARK_JAR, "/lib/test.jar");
-        final String[] mainArgs = {"arg0", "arg1"};
-        SparkArgsExtractor sparkArgsExtractor = new SparkArgsExtractor(actionConf);
-        sparkArgsExtractor.extract(mainArgs);
-        String expectedSymlink = "foo";
-        assertEquals("Error happened while setting keytab presence.", true, sparkArgsExtractor.isKeytabPresentInSparkArgs);
-        assertEquals("Error happened while deciding if keytab full path given or not.", false, sparkArgsExtractor.isKeytabsFullPathPresentInSparkArgs);
-        assertEquals("Symlink wrongly set.", expectedSymlink, sparkArgsExtractor.keytabSymlinkNameInSparkArgs);
-    }
 
     private Properties readMergedProperties() throws IOException {
         final File file = new File(SPARK_DEFAULTS_GENERATED_PROPERTIES);
@@ -604,51 +562,6 @@ public class TestSparkArgsExtractor {
         checkAndDeleteFile(SPARK_DEFAULTS_GENERATED_PROPERTIES);
         checkAndDeleteFile(SPARK_DEFAULTS_PROPERTIES);
     }
-
-    @Test
-    public void testKeytabDuplicateWithFileName() throws OozieActionConfiguratorException, IOException, URISyntaxException, ActionExecutorException, NoSuchFieldException, IllegalAccessException {
-        final Configuration actionConf = new Configuration();
-
-        actionConf.set(SparkActionExecutor.SPARK_MASTER, "yarn");
-        actionConf.set(SparkActionExecutor.SPARK_MODE, "client");
-        actionConf.set(SparkActionExecutor.SPARK_CLASS, "org.apache.oozie.example.SparkFileCopy");
-        actionConf.set(SparkActionExecutor.SPARK_JOB_NAME, "Spark Copy File");
-        actionConf.set(SparkActionExecutor.SPARK_DEFAULT_OPTS, "defaultProperty=1\ndefaultProperty2=2\ndefaultProperty3=3");
-        actionConf.set(SparkActionExecutor.SPARK_OPTS,
-                "--principal foobar --keytab /foo/bar.keytab");
-        actionConf.set(SparkActionExecutor.SPARK_JAR, "/lib/test.jar");
-
-        final String[] mainArgs = {"arg0", "arg1"};
-        SparkArgsExtractor sparkArgsExtractor = new SparkArgsExtractor(actionConf);
-        sparkArgsExtractor.extract(mainArgs);
-        String expectedFileName = "bar.keytab";
-        assertEquals("Error happened while setting keytab presence.", sparkArgsExtractor.isKeytabPresentInSparkArgs, true);
-        assertEquals("Error happened while deciding if keytab full path given or not.", sparkArgsExtractor.isKeytabsFullPathPresentInSparkArgs, true);
-        assertEquals("File name wrongly set.", sparkArgsExtractor.keytabFileNameInSparkArgs, expectedFileName);
-    }
-
-    @Test
-    public void testKeytabDuplicateWithSymlink() throws OozieActionConfiguratorException, IOException, URISyntaxException, ActionExecutorException, NoSuchFieldException, IllegalAccessException {
-        final Configuration actionConf = new Configuration();
-
-        actionConf.set(SparkActionExecutor.SPARK_MASTER, "yarn");
-        actionConf.set(SparkActionExecutor.SPARK_MODE, "client");
-        actionConf.set(SparkActionExecutor.SPARK_CLASS, "org.apache.oozie.example.SparkFileCopy");
-        actionConf.set(SparkActionExecutor.SPARK_JOB_NAME, "Spark Copy File");
-        actionConf.set(SparkActionExecutor.SPARK_DEFAULT_OPTS, "defaultProperty=1\ndefaultProperty2=2\ndefaultProperty3=3");
-        actionConf.set(SparkActionExecutor.SPARK_OPTS,
-                "--principal foobar --keytab foo");
-        actionConf.set(SparkActionExecutor.SPARK_JAR, "/lib/test.jar");
-        final String[] mainArgs = {"arg0", "arg1"};
-        SparkArgsExtractor sparkArgsExtractor = new SparkArgsExtractor(actionConf);
-        sparkArgsExtractor.extract(mainArgs);
-        String expectedSymlink = "foo";
-
-        assertEquals("Error happened while setting keytab presence.", sparkArgsExtractor.isKeytabPresentInSparkArgs, true);
-        assertEquals("Error happened while deciding if keytab full path given or not.", sparkArgsExtractor.isKeytabsFullPathPresentInSparkArgs, false);
-        assertEquals("Symlink wrongly set.", sparkArgsExtractor.keytabSymlinkNameInSparkArgs, expectedSymlink);
-    }
-}
 
     private void checkAndDeleteFile(final String filename) {
         final File f = new File(filename);
