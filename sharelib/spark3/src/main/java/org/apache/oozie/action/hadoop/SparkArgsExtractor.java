@@ -81,7 +81,6 @@ class SparkArgsExtractor {
     private static final String SPARK_OPT_SEPARATOR = ":";
     private static final String JAVA_OPT_SEPARATOR = " ";
     private static final String CONF_OPTION = "--conf";
-    private static final String KEYTAB_OPTION = "--keytab";
     private static final String MASTER_OPTION_YARN_CLUSTER = "yarn-cluster";
     private static final String MASTER_OPTION_YARN_CLIENT = "yarn-client";
     private static final String MASTER_OPTION_YARN = "yarn";
@@ -593,32 +592,6 @@ class SparkArgsExtractor {
 
     /**
      * Gets the keytab string which is either the name of the keytab when full path is given, or the symlink if not.
-     */
-    private String geKeytabNotToAdd(){
-        String keytabNotToAdd;
-        if (isKeytabsFullPathPresentInSparkArgs) {
-            keytabNotToAdd = keytabFileNameInSparkArgs;
-        } else {
-            keytabNotToAdd = keytabSymlinkNameInSparkArgs;
-        }
-        return keytabNotToAdd;
-    }
-
-    /**
-     * Gets the keytab string which is either the name of the keytab when full path is given or the symlink if not.
-     */
-    private String geKeytabNotToAdd(){
-        String keytabNotToAdd;
-        if (isKeytabsFullPathPresentInSparkArgs) {
-            keytabNotToAdd = keytabFileNameInSparkArgs;
-        } else {
-            keytabNotToAdd = keytabSymlinkNameInSparkArgs;
-        }
-        return keytabNotToAdd;
-    }
-
-    /**
-     * Gets the keytab string which is either the name of the keytab when full path is given or the symlink if not.
      */
     private String geKeytabNotToAdd(){
         String keytabNotToAdd;
