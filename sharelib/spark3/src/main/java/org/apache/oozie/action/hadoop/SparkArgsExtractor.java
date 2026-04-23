@@ -265,6 +265,16 @@ class SparkArgsExtractor {
                         keytabSymlinkNameInSparkArgs = keytabValueInSparkArgs.toString();
                     }
                 }
+                if (opt.startsWith(KEYTAB_OPTION)) {
+                    isKeytabPresentInSparkArgs = true;
+                    Path keytabValueInSparkArgs = new Path(sparkOptions.get(i + 1));
+                    if (keytabValueInSparkArgs.isAbsolute()) {
+                        isKeytabsFullPathPresentInSparkArgs = true;
+                        keytabFileNameInSparkArgs = keytabValueInSparkArgs.getName();
+                    } else {
+                        keytabSymlinkNameInSparkArgs = keytabValueInSparkArgs.toString();
+                    }
+                }
                 if (addToSparkArgs) {
                     sparkArgs.add(opt);
                 }
@@ -573,6 +583,19 @@ class SparkArgsExtractor {
 
     /**
      * Gets the keytab string which is either the name of the keytab when full path is given, or the symlink if not.
+     */
+    private String geKeytabNotToAdd(){
+        String keytabNotToAdd;
+        if (isKeytabsFullPathPresentInSparkArgs) {
+            keytabNotToAdd = keytabFileNameInSparkArgs;
+        } else {
+            keytabNotToAdd = keytabSymlinkNameInSparkArgs;
+        }
+        return keytabNotToAdd;
+    }
+
+    /**
+     * Gets the keytab string which is either the name of the keytab when full path is given or the symlink if not.
      */
     private String geKeytabNotToAdd(){
         String keytabNotToAdd;
