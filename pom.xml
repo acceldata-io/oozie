@@ -115,8 +115,11 @@
          <spark.guava.version>33.4.0-jre</spark.guava.version>
          <spark.scala.binary.version>2.12</spark.scala.binary.version>
          <spark3.version>3.5.5.3.3.6.3-102</spark3.version>
-         <spark3.guava.version>14.0.1</spark3.guava.version>
+         <spark3.guava.version>33.4.0-jre</spark3.guava.version>
          <spark3.scala.binary.version>2.12</spark3.scala.binary.version>
+         <spark3.jackson.version>2.17.2</spark3.jackson.version>
+         <spark3.commons.lang3.version>3.13.0</spark3.commons.lang3.version>
+         <spark3.htrace.version>4.1.0-incubating</spark3.htrace.version>
          <sqoop.classifier>hadoop260</sqoop.classifier>
          <tez.version>0.10.4.3.3.6.3-102</tez.version>
          <joda.time.version>2.13.1</joda.time.version>
@@ -134,7 +137,7 @@
          <log4j.version>1.2.17</log4j.version>
          <reload4j.version>1.2.25</reload4j.version>
          <activemq.version>5.15.9</activemq.version>
-         <commons.lang3.version>3.3.2</commons.lang3.version>
+         <commons.lang3.version>3.5</commons.lang3.version>
          <httpcore.version>4.4.16</httpcore.version>
          <httpclient.version>4.5.14</httpclient.version>
          <kyro.version>2.22</kyro.version>
@@ -242,6 +245,12 @@
                 <groupId>org.apache.oozie</groupId>
                 <artifactId>oozie-core</artifactId>
                 <version>${project.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.mina</groupId>
+                        <artifactId>mina-core</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.apache.oozie</groupId>
@@ -473,6 +482,18 @@
                         <artifactId>log4j</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-client-api</artifactId>
+                <version>${hadoop.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-client-runtime</artifactId>
+                <version>${hadoop.version}</version>
             </dependency>
 
             <dependency>
@@ -1287,6 +1308,12 @@
 
             <dependency>
                 <groupId>org.apache.hive</groupId>
+                <artifactId>hive-service</artifactId>
+                <version>${hive.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.hive</groupId>
                 <artifactId>hive-jdbc</artifactId>
                 <version>${hive.version}</version>
                 <exclusions>
@@ -1389,6 +1416,10 @@
                     <exclusion>
                         <groupId>org.apache.logging.log4j</groupId>
                         <artifactId>log4j-slf4j-impl</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.mina</groupId>
+                        <artifactId>mina-core</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
@@ -2357,8 +2388,11 @@
             </activation>
             <properties>
                 <spark3.version>3.5.5.3.3.6.3-102</spark3.version>
-                <spark3.guava.version>33.4.0</spark3.guava.version>
+                <spark3.guava.version>33.4.0-jre</spark3.guava.version>
                 <spark3.scala.binary.version>2.12</spark3.scala.binary.version>
+                <spark3.jackson.version>2.17.2</spark3.jackson.version>
+                <spark3.commons.lang3.version>3.13.0</spark3.commons.lang3.version>
+                <spark3.htrace.version>4.1.0-incubating</spark3.htrace.version>
             </properties>
         </profile>
         <profile>
