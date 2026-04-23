@@ -559,7 +559,6 @@ public class TestSparkArgsExtractor {
         assertEquals("Error happened while deciding if keytab full path given or not.", sparkArgsExtractor.isKeytabsFullPathPresentInSparkArgs, false);
         assertEquals("Symlink wrongly set.", sparkArgsExtractor.keytabSymlinkNameInSparkArgs, expectedSymlink);
     }
-}
 
     private void checkAndDeleteFile(final String filename) {
         final File f = new File(filename);
