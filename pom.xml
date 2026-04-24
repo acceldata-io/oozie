@@ -1794,21 +1794,7 @@
             <dependency>
                 <groupId>guru.nidi</groupId>
                 <artifactId>graphviz-java</artifactId>
-                <version>0.18.1</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.apache.xmlgraphics</groupId>
-                        <artifactId>batik-svgrasterizer</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.apache.xmlgraphics</groupId>
-                        <artifactId>batik-bridge</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.apache.xmlgraphics</groupId>
-                        <artifactId>batik-transcoder</artifactId>
-                    </exclusion>
-                </exclusions>
+                <version>0.7.0</version>
             </dependency>
 
             <!-- Fluent Job API conversion to XML -->
