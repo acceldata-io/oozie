@@ -116,7 +116,7 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- Jackson 2.17.x required by jackson-module-scala 2.17.2 bundled in Spark3 -->
+        <!-- Jackson versions must align with jackson-module-scala bundled in Spark3 -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -136,6 +136,27 @@
             <artifactId>jackson-annotations</artifactId>
             <version>${spark3.jackson.version}</version>
             <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-scala_${spark3.scala.binary.version}</artifactId>
+            <version>${spark3.jackson.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- reload4j and its SLF4J binding conflict with log4j-1.2-api (Log4j2 bridge);
+             mark provided so they are excluded from the sharelib assembly -->
+        <dependency>
+            <groupId>ch.qos.reload4j</groupId>
+            <artifactId>reload4j</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-reload4j</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.oozie</groupId>
