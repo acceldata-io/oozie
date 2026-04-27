@@ -18,20 +18,21 @@
 
 package org.apache.oozie.action.hadoop;
 
+import com.google.common.collect.Lists;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
+import org.apache.oozie.action.ActionExecutorException;
 import org.junit.After;
 import org.junit.Test;
 
-import java.io.File;
+import java.io.*;
+import java.net.URISyntaxException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -475,6 +476,52 @@ public class TestSparkArgsExtractor {
         return actionConf;
     }
 
+    @Test
+    public void testKeytabDuplicateWithFileName()
+            throws OozieActionConfiguratorException, IOException, URISyntaxException {
+        final Configuration actionConf = new Configuration();
+
+        actionConf.set(SparkActionExecutor.SPARK_MASTER, "yarn");
+        actionConf.set(SparkActionExecutor.SPARK_MODE, "client");
+        actionConf.set(SparkActionExecutor.SPARK_CLASS, "org.apache.oozie.example.SparkFileCopy");
+        actionConf.set(SparkActionExecutor.SPARK_JOB_NAME, "Spark Copy File");
+        actionConf.set(SparkActionExecutor.SPARK_DEFAULT_OPTS, "defaultProperty=1\ndefaultProperty2=2\ndefaultProperty3=3");
+        actionConf.set(SparkActionExecutor.SPARK_OPTS,
+                "--principal foobar --keytab /foo/bar.keytab");
+        actionConf.set(SparkActionExecutor.SPARK_JAR, "/lib/test.jar");
+
+        final String[] mainArgs = {"arg0", "arg1"};
+        SparkArgsExtractor sparkArgsExtractor = new SparkArgsExtractor(actionConf);
+        sparkArgsExtractor.extract(mainArgs);
+        String expectedFileName = "bar.keytab";
+        assertEquals("Error happened while setting keytab presence.", true, sparkArgsExtractor.isKeytabPresentInSparkArgs);
+        assertEquals("Error happened while deciding if keytab full path given or not.",
+                true, sparkArgsExtractor.isKeytabsFullPathPresentInSparkArgs);
+        assertEquals("File name wrongly set.", expectedFileName, sparkArgsExtractor.keytabFileNameInSparkArgs);
+    }
+
+    @Test
+    public void testKeytabDuplicateWithSymlink() throws OozieActionConfiguratorException, IOException, URISyntaxException {
+        final Configuration actionConf = new Configuration();
+
+        actionConf.set(SparkActionExecutor.SPARK_MASTER, "yarn");
+        actionConf.set(SparkActionExecutor.SPARK_MODE, "client");
+        actionConf.set(SparkActionExecutor.SPARK_CLASS, "org.apache.oozie.example.SparkFileCopy");
+        actionConf.set(SparkActionExecutor.SPARK_JOB_NAME, "Spark Copy File");
+        actionConf.set(SparkActionExecutor.SPARK_DEFAULT_OPTS, "defaultProperty=1\ndefaultProperty2=2\ndefaultProperty3=3");
+        actionConf.set(SparkActionExecutor.SPARK_OPTS,
+                "--principal foobar --keytab foo");
+        actionConf.set(SparkActionExecutor.SPARK_JAR, "/lib/test.jar");
+        final String[] mainArgs = {"arg0", "arg1"};
+        SparkArgsExtractor sparkArgsExtractor = new SparkArgsExtractor(actionConf);
+        sparkArgsExtractor.extract(mainArgs);
+        String expectedSymlink = "foo";
+        assertEquals("Error happened while setting keytab presence.", true, sparkArgsExtractor.isKeytabPresentInSparkArgs);
+        assertEquals("Error happened while deciding if keytab full path given or not.",
+                false, sparkArgsExtractor.isKeytabsFullPathPresentInSparkArgs);
+        assertEquals("Symlink wrongly set.", expectedSymlink, sparkArgsExtractor.keytabSymlinkNameInSparkArgs);
+    }
+
     private void assertContainsSublist(final List<String> expected, final List<String> actual) {
         final int sublistSize = expected.size();
         assertTrue("actual size is below expected size", actual.size() >= sublistSize);
@@ -488,6 +535,7 @@ public class TestSparkArgsExtractor {
 
         fail(String.format("actual:\n%s does not contain expected:\n%s", actual, expected));
     }
+
 
     private Properties readMergedProperties() throws IOException {
         final File file = new File(SPARK_DEFAULTS_GENERATED_PROPERTIES);
