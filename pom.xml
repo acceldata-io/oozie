@@ -115,7 +115,7 @@
          <spark.bagel.version>1.6.1</spark.bagel.version>
          <spark.guava.version>32.0.1-jre</spark.guava.version>
          <spark.scala.binary.version>2.11</spark.scala.binary.version>
-         <spark3.version>3.5.5.3.2.3.6-2</spark3.version>
+         <spark3.version>3.5.5.3.2.3.6-3</spark3.version>
          <spark3.guava.version>32.0.1-jre</spark3.guava.version>
          <spark3.scala.binary.version>2.12</spark3.scala.binary.version>
          <spark3.jackson.version>2.17.2</spark3.jackson.version>
@@ -2387,7 +2387,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <spark3.version>3.5.5.3.2.3.6-2</spark3.version>
+                <spark3.version>3.5.5.3.2.3.6-3</spark3.version>
                 <spark3.guava.version>32.0.1-jre</spark3.guava.version>
                 <spark3.scala.binary.version>2.12</spark3.scala.binary.version>
                 <spark3.jackson.version>2.17.2</spark3.jackson.version>
