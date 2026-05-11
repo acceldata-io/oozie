@@ -237,6 +237,14 @@
                     <artifactId>hadoop-annotations</artifactId>
                 </exclusion>
                 <exclusion>
+                    <groupId>org.apache.hadoop</groupId>
+                    <artifactId>hadoop-client-runtime</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.hadoop</groupId>
+                    <artifactId>hadoop-client-api</artifactId>
+                </exclusion>
+                <exclusion>
                     <groupId>org.spark-project.hive</groupId>
                     <artifactId>hive-beeline</artifactId>
                 </exclusion>
