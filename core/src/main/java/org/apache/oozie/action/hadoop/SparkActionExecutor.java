@@ -51,7 +51,11 @@ public class SparkActionExecutor extends JavaActionExecutor {
     private static final String HADOOP_CLIENT_CONF_DIR = "HADOOP_CLIENT_CONF_DIR";
 
     public SparkActionExecutor() {
-        super("spark");
+        this("spark");
+    }
+
+    protected SparkActionExecutor(final String actionType) {
+        super(actionType);
     }
 
     @Override
