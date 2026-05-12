@@ -309,6 +309,32 @@ public class TestSchemaService extends XTestCase {
             "    <end name='end' />\n" +
             "</workflow-app>\n";
 
+    private static final String SPARK3_ACTION_LAUNCHER_CONF = "<workflow-app xmlns='uri:oozie:workflow:1.0' " +
+            "name='Spark3FileCopy'>\n" +
+            "    <start to='spark3-node' />\n" +
+            "    <action name='spark3-node'>\n" +
+            "        <spark3 xmlns=\"uri:oozie:spark3-action:1.0\">\n" +
+            "            <resource-manager>${resourceManager}</resource-manager>\n" +
+            "            <name-node>${nameNode}</name-node>\n" +
+            "            <master>yarn</master>\n" +
+            "            <mode>cluster</mode>\n" +
+            "            <name>Spark3-FileCopy</name>\n" +
+            "            <class>org.apache.oozie.example.SparkFileCopy</class>\n" +
+            "            <jar>${nameNode}/user/${wf:user()}/${examplesRoot}/apps/spark3/lib/oozie-examples.jar</jar>\n" +
+            "            <arg>${nameNode}/user/${wf:user()}/${examplesRoot}/input-data/text/data.txt</arg>\n" +
+            "            <arg>${nameNode}/user/${wf:user()}/${examplesRoot}/output-data/spark3</arg>\n" +
+            "        </spark3>\n" +
+            "        <ok to=\"end\" />\n" +
+            "        <error to=\"fail\" />\n" +
+            "    </action>\n" +
+            "    <kill name=\"fail\">\n" +
+            "        <message>Workflow failed, error\n" +
+            "            message[${wf:errorMessage(wf:lastErrorNode())}]\n" +
+            "        </message>\n" +
+            "    </kill>\n" +
+            "    <end name='end' />\n" +
+            "</workflow-app>\n";
+
     private SchemaService wss;
     private Validator workflowValidator;
     private Validator coordinatorValidator;
@@ -568,5 +594,9 @@ public class TestSchemaService extends XTestCase {
 
     public void testSparkActionLauncherConfig() throws Exception {
         workflowValidator.validate(new StreamSource(new StringReader(SPARK_ACTION_LAUNCHER_CONF)));
+    }
+
+    public void testSpark3ActionLauncherConfig() throws Exception {
+        workflowValidator.validate(new StreamSource(new StringReader(SPARK3_ACTION_LAUNCHER_CONF)));
     }
 }
