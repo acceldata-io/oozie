@@ -26,14 +26,14 @@
         <relativePath>../..</relativePath>
     </parent>
 
-    <artifactId>oozie-sharelib-spark</artifactId>
+    <artifactId>oozie-sharelib-spark3</artifactId>
     <version>5.2.1.3.3.6.4-1</version>
-    <description>Apache Oozie Share Lib Spark</description>
-    <name>Apache Oozie Share Lib Spark</name>
+    <description>Apache Oozie Share Lib Spark3</description>
+    <name>Apache Oozie Share Lib Spark3</name>
     <packaging>jar</packaging>
 
     <properties>
-        <sharelib.action.postfix>spark</sharelib.action.postfix>
+        <sharelib.action.postfix>spark3</sharelib.action.postfix>
         <sharelib.transitive.filtering>false</sharelib.transitive.filtering>
     </properties>
 
@@ -47,7 +47,8 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>${spark.guava.version}</version>
+            <version>${spark3.guava.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
@@ -70,17 +71,92 @@
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
                 </exclusion>
+                <exclusion>
+                     <groupId>com.fasterxml.jackson.core</groupId>
+                     <artifactId>*</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+            <version>${spark3.commons.lang3.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <scope>compile</scope>
+        </dependency>
+
+        <!-- Hadoop client split JARs required by Spark3 YARN AM -->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client-api</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client-runtime</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-yarn-server-web-proxy</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Required by Hadoop FileSystem tracing in Spark3 AM -->
+        <dependency>
+            <groupId>org.apache.htrace</groupId>
+            <artifactId>htrace-core4</artifactId>
+            <version>${spark3.htrace.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Jackson versions must align with jackson-module-scala bundled in Spark3 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${spark3.jackson.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${spark3.jackson.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${spark3.jackson.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-scala_${spark3.scala.binary.version}</artifactId>
+            <version>${spark3.jackson.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- reload4j and its SLF4J binding conflict with log4j-1.2-api (Log4j2 bridge);
+             mark provided so they are excluded from the sharelib assembly -->
+        <dependency>
+            <groupId>ch.qos.reload4j</groupId>
+            <artifactId>reload4j</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-reload4j</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.oozie</groupId>
@@ -89,18 +165,10 @@
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_${spark.scala.binary.version}</artifactId>
-            <version>${spark.version}</version>
+            <artifactId>spark-core_${spark3.scala.binary.version}</artifactId>
+            <version>${spark3.version}</version>
             <scope>compile</scope>
             <exclusions>
-                <exclusion>
-                    <groupId>ch.qos.logback</groupId>
-                    <artifactId>logback-classic</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>ch.qos.logback</groupId>
-                    <artifactId>logback-core</artifactId>
-                </exclusion>
                 <exclusion>
                     <groupId>org.apache.hadoop</groupId>
                     <artifactId>hadoop-client</artifactId>
@@ -141,18 +209,22 @@
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.xerial.snappy</groupId>
+                    <artifactId>snappy-java</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-graphx_${spark.scala.binary.version}</artifactId>
-            <version>${spark.version}</version>
+            <artifactId>spark-graphx_${spark3.scala.binary.version}</artifactId>
+            <version>${spark3.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-hive_${spark.scala.binary.version}</artifactId>
-            <version>${spark.version}</version>
+            <artifactId>spark-hive_${spark3.scala.binary.version}</artifactId>
+            <version>${spark3.version}</version>
             <scope>compile</scope>
             <exclusions>
                 <exclusion>
@@ -207,30 +279,28 @@
                     <groupId>org.spark-project.hive</groupId>
                     <artifactId>hive-shims</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-mllib_${spark.scala.binary.version}</artifactId>
-            <version>${spark.version}</version>
+            <artifactId>spark-mllib_${spark3.scala.binary.version}</artifactId>
+            <version>${spark3.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-repl_${spark.scala.binary.version}</artifactId>
-            <version>${spark.version}</version>
+            <artifactId>spark-sql_${spark3.scala.binary.version}</artifactId>
+            <version>${spark3.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql_${spark.scala.binary.version}</artifactId>
-            <version>${spark.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming_${spark.scala.binary.version}</artifactId>
-            <version>${spark.version}</version>
+            <artifactId>spark-streaming_${spark3.scala.binary.version}</artifactId>
+            <version>${spark3.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -243,6 +313,12 @@
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
             <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -278,8 +354,8 @@
 
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-yarn_${spark.scala.binary.version}</artifactId>
-            <version>${spark.version}</version>
+            <artifactId>spark-yarn_${spark3.scala.binary.version}</artifactId>
+            <version>${spark3.version}</version>
             <scope>compile</scope>
             <exclusions>
                 <exclusion>
@@ -443,4 +519,3 @@
         </plugins>
     </build>
 </project>
-
