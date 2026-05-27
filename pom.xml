@@ -194,7 +194,7 @@
         <repository>
             <id>acceldata central</id>
             <name>acceldata central</name>
-            <url>https://repo1.acceldata.dev/repository/odp-central/</url>
+            <url>https://repo1.acceldata.dev/repository/odp-staging-central/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -205,7 +205,7 @@
         <repository>
             <id>acceldata staging central</id>
             <name>acceldata staging central</name>
-            <url>https://repo1.acceldata.dev/repository/odp-central/</url>
+            <url>https://repo1.acceldata.dev/repository/odp-staging-central/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
