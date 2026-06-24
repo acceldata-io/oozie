@@ -104,7 +104,7 @@
 
 
          <!-- Sharelib component versions -->
-         <hive.version>4.0.1.${odp.release.version}</hive.version>
+         <hive.version>4.1.0.${odp.release.version}</hive.version>
          <hive.jline.version>2.14.6</hive.jline.version>
          <pig.version>0.16.0</pig.version>
          <pig.classifier>h2</pig.classifier>
