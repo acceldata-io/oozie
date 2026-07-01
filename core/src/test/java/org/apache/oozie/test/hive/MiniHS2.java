@@ -76,8 +76,8 @@ public class MiniHS2 extends AbstractHiveService {
     Path wareHouseDir = new Path(baseDfsDir, "warehouse");
     fs.mkdirs(wareHouseDir);
     setWareHouseDir(wareHouseDir.toString());
-    System.setProperty(HiveConf.ConfVars.METASTORECONNECTURLKEY.varname, metaStoreURL);
-    hiveConf.setVar(HiveConf.ConfVars.METASTORECONNECTURLKEY, metaStoreURL);
+    System.setProperty(HiveConf.ConfVars.METASTORE_CONNECT_URL_KEY.varname, metaStoreURL);
+    hiveConf.setVar(HiveConf.ConfVars.METASTORE_CONNECT_URL_KEY, metaStoreURL);
     // reassign a new port, just in case if one of the MR services grabbed the last one
     setBinaryPort(findFreePort());
     hiveConf.setVar(ConfVars.HIVE_SERVER2_TRANSPORT_MODE, HS2_BINARY_MODE);
@@ -87,8 +87,8 @@ public class MiniHS2 extends AbstractHiveService {
 
     Path scratchDir = new Path(baseDfsDir, "scratch");
     fs.mkdirs(scratchDir);
-    System.setProperty(HiveConf.ConfVars.SCRATCHDIR.varname, scratchDir.toString());
-    System.setProperty(HiveConf.ConfVars.LOCALSCRATCHDIR.varname,
+    System.setProperty(HiveConf.ConfVars.SCRATCH_DIR.varname, scratchDir.toString());
+    System.setProperty(HiveConf.ConfVars.LOCAL_SCRATCH_DIR.varname,
         baseDir.getPath() + File.separator + "scratch");
   }
 

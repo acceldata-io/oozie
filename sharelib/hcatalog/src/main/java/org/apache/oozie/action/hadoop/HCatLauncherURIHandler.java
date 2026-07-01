@@ -84,7 +84,7 @@ public class HCatLauncherURIHandler implements LauncherURIHandler {
         if (!serverURI.equals("")) {
             hiveConf.set("hive.metastore.local", "false");
         }
-        hiveConf.set(HiveConf.ConfVars.METASTOREURIS.varname, serverURI);
+        hiveConf.set(HiveConf.ConfVars.METASTORE_URIS.varname, serverURI);
         try {
             System.out.println("Creating HCatClient for user=" + UserGroupInformation.getCurrentUser() + " and server="
                     + serverURI);

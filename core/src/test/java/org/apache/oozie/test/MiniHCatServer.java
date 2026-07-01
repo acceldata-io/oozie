@@ -97,13 +97,13 @@ public class MiniHCatServer {
 
     private void initLocalMetastoreConf() throws IOException {
         hiveConf = new HiveConf(hadoopConf, this.getClass());
-        hiveConf.set(HiveConf.ConfVars.METASTOREWAREHOUSE.varname, new File("target/warehouse").getAbsolutePath());
+        hiveConf.set(HiveConf.ConfVars.METASTORE_WAREHOUSE.varname, new File("target/warehouse").getAbsolutePath());
         hiveConf.set("hive.metastore.local", "true"); // For hive 0.9
-        hiveConf.set(HiveConf.ConfVars.METASTORECONNECTURLKEY.varname, "jdbc:derby:target/metastore_db;create=true");
+        hiveConf.set(HiveConf.ConfVars.METASTORE_CONNECT_URL_KEY.varname, "jdbc:derby:target/metastore_db;create=true");
 
         setSystemProperty("hive.metastore.local", "true");
-        setSystemProperty(HiveConf.ConfVars.METASTOREWAREHOUSE.varname, new File("target/warehouse").getAbsolutePath());
-        setSystemProperty(HiveConf.ConfVars.METASTORECONNECTURLKEY.varname,
+        setSystemProperty(HiveConf.ConfVars.METASTORE_WAREHOUSE.varname, new File("target/warehouse").getAbsolutePath());
+        setSystemProperty(HiveConf.ConfVars.METASTORE_CONNECT_URL_KEY.varname,
                 "jdbc:derby:target/metastore_db;create=true");
         File derbyLogFile = new File("target/derby.log");
         derbyLogFile.createNewFile();
@@ -114,16 +114,16 @@ public class MiniHCatServer {
 
         hiveConf = new HiveConf(hadoopConf, this.getClass());
         hiveConf.set("hive.metastore.local", "false"); // For hive 0.9
-        hiveConf.setVar(HiveConf.ConfVars.METASTOREURIS, "thrift://localhost:" + msPort);
-        hiveConf.set(HiveConf.ConfVars.PREEXECHOOKS.varname, "");
-        hiveConf.set(HiveConf.ConfVars.POSTEXECHOOKS.varname, "");
+        hiveConf.setVar(HiveConf.ConfVars.METASTORE_URIS, "thrift://localhost:" + msPort);
+        hiveConf.set(HiveConf.ConfVars.PRE_EXEC_HOOKS.varname, "");
+        hiveConf.set(HiveConf.ConfVars.PRE_EXEC_HOOKS.varname, "");
         hiveConf.set(HiveConf.ConfVars.HIVE_SUPPORT_CONCURRENCY.varname, "false");
     }
 
     private void startMetastoreServer() throws Exception {
         final HiveConf serverConf = new HiveConf(hadoopConf, this.getClass());
         serverConf.set("hive.metastore.local", "false");
-        serverConf.set(HiveConf.ConfVars.METASTORECONNECTURLKEY.varname, "jdbc:derby:target/metastore_db;create=true");
+        serverConf.set(HiveConf.ConfVars.METASTORE_CONNECT_URL_KEY.varname, "jdbc:derby:target/metastore_db;create=true");
         //serverConf.set(HiveConf.ConfVars.METASTORE_EVENT_LISTENERS.varname, NotificationListener.class.getName());
         File derbyLogFile = new File("target/derby.log");
         derbyLogFile.createNewFile();
@@ -188,7 +188,7 @@ public class MiniHCatServer {
     }
 
     public String getMetastoreURI() {
-        return hiveConf.get(HiveConf.ConfVars.METASTOREURIS.varname);
+        return hiveConf.get(HiveConf.ConfVars.METASTORE_URIS.varname);
     }
 
     public HCatClient getHCatClient() {
