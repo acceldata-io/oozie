@@ -95,7 +95,7 @@ public class HCatCredentialHelper {
         hiveConf.set(HIVE_METASTORE_SASL_ENABLED, "true");
         hiveConf.set(HIVE_METASTORE_KERBEROS_PRINCIPAL, principal);
         hiveConf.set(HIVE_METASTORE_LOCAL, "false");
-        hiveConf.set(HiveConf.ConfVars.METASTOREURIS.varname, server);
+        hiveConf.set(HiveConf.ConfVars.METASTORE_URIS.varname, server);
         String protection = launcherConfig.get(HADOOP_RPC_PROTECTION,
            SaslRpcServer.QualityOfProtection.AUTHENTICATION.name()
               .toLowerCase());

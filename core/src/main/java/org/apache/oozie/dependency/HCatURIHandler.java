@@ -251,7 +251,7 @@ public class HCatURIHandler implements URIHandler {
         if (!serverURI.equals("")) {
             hiveConf.set("hive.metastore.local", "false");
         }
-        hiveConf.set(HiveConf.ConfVars.METASTOREURIS.varname, serverURI);
+        hiveConf.set(HiveConf.ConfVars.METASTORE_URIS.varname, serverURI);
         return hiveConf;
     }
 
@@ -259,7 +259,7 @@ public class HCatURIHandler implements URIHandler {
         HiveConf hiveConf = getHiveConf(uri, conf);
         try {
             XLog.getLog(HCatURIHandler.class).info("Creating HCatClient for login_user [{0}] and server [{1}] ",
-                    UserGroupInformation.getLoginUser(), hiveConf.get(HiveConf.ConfVars.METASTOREURIS.varname));
+                    UserGroupInformation.getLoginUser(), hiveConf.get(HiveConf.ConfVars.METASTORE_URIS.varname));
             return HCatClient.create(hiveConf);
         }
         catch (HCatException e) {
@@ -300,7 +300,7 @@ public class HCatURIHandler implements URIHandler {
             }
             XLog.getLog(HCatURIHandler.class).info(
                     "Creating HCatClient for user [{0}] login_user [{1}] and server [{2}] ", user,
-                    UserGroupInformation.getLoginUser(), hiveConf.get(HiveConf.ConfVars.METASTOREURIS.varname));
+                    UserGroupInformation.getLoginUser(), hiveConf.get(HiveConf.ConfVars.METASTORE_URIS.varname));
             HCatClient hcatClient = ugi.doAs(new PrivilegedExceptionAction<HCatClient>() {
                 @Override
                 public HCatClient run() throws Exception {
