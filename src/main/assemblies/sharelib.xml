@@ -30,10 +30,11 @@
     </files>
 
     <fileSets>
+        <!-- OSV-18467 Remove pig module from ooziesharelib for now as it is not included in ODP stack to exclude pig package CVEs
         <fileSet>
             <directory>${basedir}/pig/target/partial-sharelib</directory>
             <outputDirectory>/</outputDirectory>
-        </fileSet>
+        </fileSet-->
         <fileSet>
             <directory>${basedir}/streaming/target/partial-sharelib</directory>
             <outputDirectory>/</outputDirectory>
