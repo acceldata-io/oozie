@@ -102,11 +102,12 @@
             </exclusions>
         </dependency>
 
+        <!-- OSV-18467 Remove pig module from ooziesharelib for now as it is not included in ODP stack to exclude pig package CVEs
         <dependency>
             <groupId>org.apache.oozie</groupId>
             <artifactId>oozie-sharelib-pig</artifactId>
             <scope>compile</scope>
-        </dependency>
+        </dependency-->
 
         <dependency>
             <groupId>org.apache.oozie</groupId>

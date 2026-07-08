@@ -227,10 +227,11 @@
                         </goals>
                         <configuration>
                             <artifactItems>
+                                <!-- OSV-18467 Remove pig module from ooziesharelib for now as it is not included in ODP stack to exclude pig package CVEs
                                 <artifactItem>
                                     <groupId>org.apache.oozie</groupId>
                                     <artifactId>oozie-sharelib-pig</artifactId>
-                                </artifactItem>
+                                </artifactItem-->
                                 <artifactItem>
                                     <groupId>org.apache.oozie</groupId>
                                     <artifactId>oozie-sharelib-hive</artifactId>

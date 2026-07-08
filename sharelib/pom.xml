@@ -34,7 +34,8 @@
     <modules>
         <module>streaming</module>
         <module>hcatalog</module>
-        <module>pig</module>
+        <!-- OSV-18467 Remove pig module from ooziesharelib for now as it is not included in ODP stack to exclude pig package CVEs>
+        <module>pig</module-->
         <module>git</module>
         <module>hive</module>
         <module>hive2</module>
