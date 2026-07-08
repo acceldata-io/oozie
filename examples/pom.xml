@@ -212,6 +212,16 @@
                     </descriptors>
                 </configuration>
             </plugin>
+             <!-- OSV-18467 Remove pig module from ooziesharelib for now as it is not included in ODP stack to exclude pig package CVEs-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>**/example/DemoPigMain.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
