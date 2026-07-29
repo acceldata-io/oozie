@@ -76,6 +76,11 @@
                     <groupId>org.apache.thrift</groupId>
                     <artifactId>thrift</artifactId>
                 </exclusion>
+                <!-- OCR-2571: old libthrift (e.g. 0.9.3) breaks Hive Metastore 0.16.0 TSocket API -->
+                <exclusion>
+                    <groupId>org.apache.thrift</groupId>
+                    <artifactId>libthrift</artifactId>
+                </exclusion>
                 <exclusion>
                     <groupId>org.apache.httpcomponents</groupId>
                     <artifactId>httpclient</artifactId>
@@ -91,6 +96,28 @@
                 <exclusion>
                     <groupId>org.apache.logging.log4j</groupId>
                     <artifactId>log4j-slf4j-impl</artifactId>
+                </exclusion>
+                <!-- OCR-2571: Log4j2 bridge + reload4j on same CP causes LogEventAdapter VerifyError -->
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-1.2-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-web</artifactId>
+                </exclusion>
+                <!-- OCR-2571: avoid shipping obsolete jline 0.9.94 into sqoop sharelib -->
+                <exclusion>
+                    <groupId>jline</groupId>
+                    <artifactId>jline</artifactId>
                 </exclusion>
                 <exclusion>
                     <groupId>org.mortbay.jetty</groupId>
@@ -177,6 +204,13 @@
                     <artifactId>logback-core</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <!-- Align thrift with Hive Metastore (0.16.0) after excluding transitive old libthrift -->
+        <dependency>
+            <groupId>org.apache.thrift</groupId>
+            <artifactId>libthrift</artifactId>
+            <version>0.16.0</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.avro</groupId>
