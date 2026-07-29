@@ -69,6 +69,11 @@
                     <groupId>org.apache.thrift</groupId>
                     <artifactId>libthrift</artifactId>
                 </exclusion>
+                <!-- OCR-2571: jline 0.9.94 from Oozie BOM breaks Beeline when hcatalog is merged into hive2 -->
+                <exclusion>
+                    <groupId>jline</groupId>
+                    <artifactId>jline</artifactId>
+                </exclusion>
                 <exclusion>
                     <groupId>org.apache.zookeeper</groupId>
                     <artifactId>zookeeper</artifactId>
