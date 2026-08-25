@@ -155,6 +155,7 @@
          <spotbugs.version>3.1.11</spotbugs.version>
          <powermock.version>2.0.2</powermock.version>
          <guava.version>33.4.0-jre</guava.version>
+         <postgresql.version>42.6.0</postgresql.version>
     </properties>
 
     <modules>
@@ -1636,9 +1637,9 @@
             </dependency>
 
             <dependency>
-                <groupId>postgresql</groupId>
+                <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
-                <version>9.0-801.jdbc4</version>
+                <version>${postgresql.version}</version>
             </dependency>
 
             <dependency>
