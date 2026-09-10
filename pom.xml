@@ -27,7 +27,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.apache.oozie</groupId>
     <artifactId>oozie-main</artifactId>
-    <version>5.2.1.3.3.6.5-SNAPSHOT</version>
+    <version>5.2.1.3.3.6.501-SNAPSHOT</version>
     <description>Apache Oozie Main</description>
     <name>Apache Oozie Main</name>
     <packaging>pom</packaging>
@@ -59,7 +59,7 @@
 
     <properties>
         <log4j2.version>2.25.4</log4j2.version>
-        <odp.release.version>3.3.6.5-SNAPSHOT</odp.release.version>
+        <odp.release.version>3.3.6.501-SNAPSHOT</odp.release.version>
         <targetJavaVersion>11</targetJavaVersion>
         <sourceJavaVersion>11</sourceJavaVersion>
         <minJavaVersion>11</minJavaVersion>
