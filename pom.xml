@@ -58,7 +58,7 @@
     </organization>
 
     <properties>
-        <log4j2.version>2.25.4</log4j2.version>
+        <log4j2.version>2.25.5</log4j2.version>
         <odp.release.version>3.3.6.6-SNAPSHOT</odp.release.version>
         <targetJavaVersion>11</targetJavaVersion>
         <sourceJavaVersion>11</sourceJavaVersion>
