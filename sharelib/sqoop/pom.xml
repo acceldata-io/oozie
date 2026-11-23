@@ -76,7 +76,7 @@
                     <groupId>org.apache.thrift</groupId>
                     <artifactId>thrift</artifactId>
                 </exclusion>
-                <!-- OCR-2571: old libthrift (e.g. 0.9.3) breaks Hive Metastore 0.16.0 TSocket API -->
+                <!-- OCR-2571: old libthrift (e.g. 0.9.3) breaks Hive Metastore 0.24.0 TSocket API -->
                 <exclusion>
                     <groupId>org.apache.thrift</groupId>
                     <artifactId>libthrift</artifactId>
@@ -205,11 +205,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- Align thrift with Hive Metastore (0.16.0) after excluding transitive old libthrift -->
+        <!-- Align thrift with Hive Metastore (0.24.0) after excluding transitive old libthrift -->
         <dependency>
             <groupId>org.apache.thrift</groupId>
             <artifactId>libthrift</artifactId>
-            <version>0.16.0</version>
+            <version>0.24.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
